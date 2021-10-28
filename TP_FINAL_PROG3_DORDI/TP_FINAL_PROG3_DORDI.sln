@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP_FINAL_PROG3_DORDI", "TP_FINAL_PROG3_DORDI\TP_FINAL_PROG3_DORDI.csproj", "{9CC5527E-E876-4135-A4E5-20EED2927D8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5041B954-1302-4E3B-8490-F38AD4E332DA} = {5041B954-1302-4E3B-8490-F38AD4E332DA}
+		{6BD6EB76-5723-4F26-AA02-225409926DD0} = {6BD6EB76-5723-4F26-AA02-225409926DD0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{6BD6EB76-5723-4F26-AA02-225409926DD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{5041B954-1302-4E3B-8490-F38AD4E332DA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6BD6EB76-5723-4F26-AA02-225409926DD0} = {6BD6EB76-5723-4F26-AA02-225409926DD0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

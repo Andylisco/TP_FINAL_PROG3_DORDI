@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 
-namespace negocio
+namespace Negocio
 {
-   public class AccesoDatos
+    public class AccesoDatos
     {
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
         public SqlDataReader Lector
         {
-            get { return lector;}
+            get { return lector; }
         }
 
         public AccesoDatos()
@@ -35,14 +35,14 @@ namespace negocio
 
             try
             {
-               conexion.Open();
+                conexion.Open();
                 lector = comando.ExecuteReader();
             }
             catch (Exception ex)
             {
 
                 throw ex;
-            }            
+            }
         }
 
         public void ejecutarAccion()
@@ -63,7 +63,7 @@ namespace negocio
 
         public void setearParametros(string Nombre, Object Valor)
         {
-            comando.Parameters.AddWithValue(Nombre,Valor);
+            comando.Parameters.AddWithValue(Nombre, Valor);
         }
 
         public void cerrarConexion()
@@ -75,3 +75,4 @@ namespace negocio
         }
     }
 }
+
