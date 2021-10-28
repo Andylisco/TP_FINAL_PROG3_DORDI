@@ -43,7 +43,7 @@ namespace Negocio
 
                 Prov.Rubro = new Rubro();
                 if (!(Datos.Lector["Cod_Rubro"] is DBNull))
-                    Prov.Rubro.Codigo = (string)Datos.Lector["Cod_Rubro"];
+                    Prov.Rubro.Codigo = (int)Datos.Lector["Cod_Rubro"];
 
                 Prov.Rubro.Descripcion = "";
 
@@ -65,10 +65,10 @@ namespace Negocio
             {
                 
                         datos.setearConsulta("SELECT Pr.CUIT, Pr.RazonSocial, Telefono = ISNULL(Pr.Telefono,'')," + 
-                                     ", Direccion = ISNULL(Pr.Direccion, ''), Mail = ISNULL(Pr.Mail, '')," +
-                                     "   PersonaContacto = ISNULL(Pr. PersonaContacto, ''), Pr.Cod_Rubro, " +
-                                     ", RubroDesc = R.Descripcion " +
-                                     "FROM Proveedores Pr INNER JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " + WHERE);
+                                     " Direccion = ISNULL(Pr.Direccion, ''), Mail = ISNULL(Pr.Mail, '')," +
+                                     " PersonaContacto = ISNULL(Pr. PersonaContacto, ''), Pr.Cod_Rubro," +
+                                     " RubroDesc = ISNULL(R.Descripcion,'') " +
+                                     "FROM Proveedores Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " + WHERE);
 
 
 
@@ -88,7 +88,7 @@ namespace Negocio
 
                     //SE CARGA EL RUBRO COMO OBJETOS
                     aux.Rubro = new Rubro();
-                    aux.Rubro.Codigo = (string)datos.Lector["Cod_Rurbo"];
+                    aux.Rubro.Codigo = (int)datos.Lector["Cod_Rubro"];
                     aux.Rubro.Descripcion = (string)datos.Lector["RubroDesc"];
                                         
                     //LO AGREGO A LA LISTA

@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class Rubro
     {
-        public string Codigo { get; set; }
+        public int Codigo { get; set; }
         public string Descripcion { get; set; }
 
 

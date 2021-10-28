@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Contact.aspx" />
+    <Content Include="Proveedores.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -169,12 +169,12 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
+    <Compile Include="Proveedores.aspx.cs">
+      <DependentUpon>Proveedores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
+    <Compile Include="Proveedores.aspx.designer.cs">
+      <DependentUpon>Proveedores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -220,6 +220,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{6bd6eb76-5723-4f26-aa02-225409926dd0}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{5041b954-1302-4e3b-8490-f38ad4e332da}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

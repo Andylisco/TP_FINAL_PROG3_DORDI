@@ -13,5 +13,11 @@ namespace TP_FINAL_PROG3_DORDI
         {
 
         }
+
+
+        protected void btn_Proveedor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Proveedores");
+        }
     }
 }
