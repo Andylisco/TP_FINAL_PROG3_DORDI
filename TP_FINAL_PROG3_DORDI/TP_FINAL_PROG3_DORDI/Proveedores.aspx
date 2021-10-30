@@ -13,7 +13,7 @@
     <hr />
 
     <div>
-        <a href="/FormProveedor">AGREGAR ARTICULO</a>
+        <a href="/FormProveedor">AGREGAR PROVEEDOR</a> 
     </div>
    
    <!-- <address>

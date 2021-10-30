@@ -43,7 +43,7 @@ namespace Negocio
 
                 Prov.Rubro = new Rubro();
                 if (!(Datos.Lector["Cod_Rubro"] is DBNull))
-                    Prov.Rubro.Codigo = (int)Datos.Lector["Cod_Rubro"];
+                    Prov.Rubro.Codigo = (string)Datos.Lector["Cod_Rubro"];
 
                 Prov.Rubro.Descripcion = "";
 
@@ -88,7 +88,7 @@ namespace Negocio
 
                     //SE CARGA EL RUBRO COMO OBJETOS
                     aux.Rubro = new Rubro();
-                    aux.Rubro.Codigo = (int)datos.Lector["Cod_Rubro"];
+                    aux.Rubro.Codigo = (string)datos.Lector["Cod_Rubro"];
                     aux.Rubro.Descripcion = (string)datos.Lector["RubroDesc"];
                                         
                     //LO AGREGO A LA LISTA

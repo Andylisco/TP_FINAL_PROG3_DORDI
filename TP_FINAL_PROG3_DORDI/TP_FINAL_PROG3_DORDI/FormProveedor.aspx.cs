@@ -13,9 +13,27 @@ namespace TP_FINAL_PROG3_DORDI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                txt_CUIT.MaxLength = 11;
+                txt_RazonSocial.MaxLength = 100;
+                txt_Telefono.MaxLength = 100;
+                txt_Mail.MaxLength = 100;
+                txt_Direccion.MaxLength = 100;
+                txt_PersonaContacto.MaxLength = 100;
+                CargarRubros();
+            }
         }
 
+
+        protected void CargarRubros()
+        {
+            NegRubro CatNeg = new NegRubro();
+            cbx_Rubro.DataSource = CatNeg.GetAll();
+            cbx_Rubro.DataValueField = "Codigo";
+            cbx_Rubro.DataTextField = "Descripcion";
+            cbx_Rubro.DataBind();
+        }
 
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
@@ -32,7 +50,7 @@ namespace TP_FINAL_PROG3_DORDI
             Prove.Telefono = txt_Telefono.Text;
             Prove.Mail = txt_Mail.Text;
             Prove.Rubro = new Rubro();
-            Prove.Rubro.Codigo = int.Parse(cbx_Rubro.SelectedItem.Value);
+            Prove.Rubro.Codigo = (string)cbx_Rubro.SelectedItem.Value;
             Prove.PersonaContacto = txt_PersonaContacto.Text;
             
 
