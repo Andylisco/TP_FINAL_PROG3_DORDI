@@ -13,5 +13,10 @@ Codigo varchar(3) primary key,
 Descripcion varchar(100) not null,
 )
 
+Create Table Usuarios(
+NombreUsuario nvarchar(50) primary key,
+Clave nvarchar(20) not null,
+NivelUsuario int not null,
+Estado bit not null default(1),
+)
 
-RazonSocial, Telefono, Direccion, Mail, Cod_Rubro, PersonaContacto
