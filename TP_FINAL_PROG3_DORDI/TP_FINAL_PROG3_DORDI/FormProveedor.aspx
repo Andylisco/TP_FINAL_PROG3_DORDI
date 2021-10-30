@@ -15,6 +15,7 @@
     </div>
 
     <div>
+
         <asp:Label ID="lbl_Direccion" runat="server" for="txt_Direccion" class="form-label" Font-Bold="true" Text="Direccion"></asp:Label>
         <asp:TextBox ID="txt_Direccion" runat="server" class="form-control"></asp:TextBox>
     </div>
