@@ -16,6 +16,17 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+
+     <style>
+         .Saludo{
+             display: flex;
+             align-items:flex-end;
+             color:white;
+         }
+         
+
+     </style>
+
 </head>
 <body>
     <form runat="server">
@@ -48,7 +59,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Nombre de la aplicación</a>
+                    <a class="navbar-brand" runat="server" href="~/">TP FINAL 3</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -59,6 +70,9 @@
                         <li><a runat="server" href="~/Clientes">CLIENTES</a></li>
                     </ul>
                 </div>
+                 <span class="navbar-text">                     
+                       <asp:Label ID="Saludo" runat="server" CssClass="Saludo"/>
+                 </span>                
             </div>
         </div>
         <div class="container body-content">

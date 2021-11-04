@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FormProveedor.aspx.cs" Inherits="TP_FINAL_PROG3_DORDI.FormProveedor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+     <hr />
+     <hr />
       
     <form action="/" method="post">
             <div>
@@ -43,6 +46,8 @@
 
     <div>
         <asp:Button Text="Grabar Proveedor" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" />
+
+        <asp:Button Text="Actualiza Proveedor" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" />
     </div>
     </form>
     

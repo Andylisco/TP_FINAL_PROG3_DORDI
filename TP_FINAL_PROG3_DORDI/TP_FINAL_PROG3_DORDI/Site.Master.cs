@@ -11,7 +11,8 @@ namespace TP_FINAL_PROG3_DORDI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var Usuario = Session["Usuario"].ToString();
+            Saludo.Text = "Hola " + Usuario;
         }
     }
 }

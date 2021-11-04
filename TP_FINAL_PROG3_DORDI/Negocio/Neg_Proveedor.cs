@@ -15,7 +15,7 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT RazonSocial, Telefono, Direccion, Mail, Cod_Rubro, PersonaContacto FROM Proveedores WHERE CUIT = @NroProveedor");
+            Datos.setearConsulta("SELECT RazonSocial, Telefono, Direccion, Mail, Cod_Rubro, PersonaContacto FROM Proveedores WHERE CUIT = @CUIT");
             Datos.setearParametros("@CUIT", CUIT);
 
             Datos.ejecutarLectura();
@@ -138,7 +138,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
 
 
-            datos.setearConsulta("UPDATE ARTICULOS SET RazonSocial = @RazonSocial, Telefono = @Telefono, " +
+            datos.setearConsulta("UPDATE Proveedores SET RazonSocial = @RazonSocial, Telefono = @Telefono, " +
                 "Direccion = @Direccion, @Mail = @Mail, PersonaContacto = @PersonaContacto, Cod_Rubro = @Cod_Rubro WHERE CUIT = @CUIT");
 
             datos.setearParametros("@CUIT", nuevo.CUIT);

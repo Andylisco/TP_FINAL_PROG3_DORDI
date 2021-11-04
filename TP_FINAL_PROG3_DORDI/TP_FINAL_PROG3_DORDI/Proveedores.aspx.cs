@@ -11,15 +11,17 @@ namespace TP_FINAL_PROG3_DORDI
 {
     public partial class Contact : Page
     {
+        public List<Proveedor> ListaProv { get; set; }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Neg_Proveedor Neg_Prov = new Neg_Proveedor();
 
-            List<Proveedor> ListaArt = Neg_Prov.GetAll();
+            ListaProv = Neg_Prov.GetAll();
 
-            dgvProveedores.DataSource = ListaArt;
-
-            dgvProveedores.DataBind();
+           // dgvProveedores.DataSource = ListaProv;
+           //
+           // dgvProveedores.DataBind();
         }
     }
 }
