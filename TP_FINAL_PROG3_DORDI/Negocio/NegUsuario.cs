@@ -29,12 +29,11 @@ namespace Negocio
                 Usuario.Clave = Clave;
 
                 if (!(Datos.Lector["EMail"] is DBNull))
-                    Usuario.Email = (string)Datos.Lector["EMail"];
+                    Usuario.EMail = (string)Datos.Lector["EMail"];
 
                 if (!(Datos.Lector["NivelUsuario"] is DBNull))
                     Usuario.Nivel = (int)Datos.Lector["NivelUsuario"];
-
-                Usuario.Estado = true;
+                                
 
             }
 

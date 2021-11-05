@@ -24,7 +24,7 @@ namespace TP_FINAL_PROG3_DORDI
 
             Usuario User = Neguser.GetSingle(txt_Usuario.Text, txt_Contraseña.Text);
 
-            if (User.Email is null)
+            if (User.EMail is null)
             {
                 Msg_ErrorLogin.Visible = true;
 

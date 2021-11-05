@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
    
-    <form>
+    
      <table class="table">
   <thead>
     <tr>
@@ -33,6 +33,6 @@
     </tr>
   </tbody>
 </table>
-    </form>
+    
 
 </asp:Content>

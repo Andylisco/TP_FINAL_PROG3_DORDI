@@ -5,7 +5,7 @@
      <hr />
      <hr />
       
-    <form action="/" method="post">
+   
             <div>
                 <asp:Label ID="lbl_CUIT" runat="server" for="txt_CUIT" class="form-label" Font-Bold="true" Text="CUIT"/>
                 <asp:TextBox ID="txt_CUIT" runat="server" class="form-control" aria-describedby="lbl_ayudaCuit" OnTextChanged="txt_CUIT_TextChanged" AutoPostBack="true"/>
@@ -49,7 +49,7 @@
 
         <asp:Button Text="Actualiza Proveedor" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" />
     </div>
-    </form>
+ 
     
     
 </asp:Content>

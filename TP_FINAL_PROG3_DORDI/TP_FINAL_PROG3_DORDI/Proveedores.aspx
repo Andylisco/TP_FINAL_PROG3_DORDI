@@ -6,7 +6,22 @@
 
     <hr />
 
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+         <a href="/FormProveedor" class="btn btn-primary">AGREGAR PROVEEDOR</a> 
+         <button type="button" class="btn btn-secondary">2</button>
 
+        <!--<div class="btn-group" role="group">
+             <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Dropdown
+             </button>
+             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Dropdown link</a>
+                <a class="dropdown-item" href="#">Dropdown link</a>
+             </div>
+        </div>-->
+    </div>
+
+    
         <table class="table">
   <thead>
     <tr>
@@ -45,9 +60,7 @@
 
     <hr />
 
-    <div>
-        <a href="/FormProveedor">AGREGAR PROVEEDOR</a> 
-    </div> -->
+     -->
    
    <!-- <address>
         <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
