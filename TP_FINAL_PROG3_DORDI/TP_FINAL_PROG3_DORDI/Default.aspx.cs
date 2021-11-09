@@ -11,7 +11,11 @@ namespace TP_FINAL_PROG3_DORDI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var NivelU = (int)Session["NivelUsuario"];
+            if (NivelU != 0)
+            {
+                btn_GestionarUsuarios.Visible = false;
+            }
         }
 
 

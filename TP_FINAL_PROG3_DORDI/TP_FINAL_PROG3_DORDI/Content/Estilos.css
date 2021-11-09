@@ -1,0 +1,15 @@
+﻿.CentrarTitulos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+
+.CentrarFormularios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:15px;
+}
+

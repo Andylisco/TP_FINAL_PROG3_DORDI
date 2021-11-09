@@ -23,6 +23,8 @@ namespace TP_FINAL_PROG3_DORDI
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Saludo;
 
+       
+
         /// <summary>
         /// Control MainContent.
         /// </summary>

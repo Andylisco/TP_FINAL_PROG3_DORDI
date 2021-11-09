@@ -4,44 +4,52 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-    .Menu 
-    {
-        display: flex;        
-        align-items: center;
-        justify-content: center;
-        
-    }
-    
+        .Menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scaled {
+            transform: scale(1.5);
+            transform-origin: top;
+        }
     </style>
 
 
-    <hr />
-    <hr />
+    <div class="container">
+        <div class="col-3"></div>
+        <div class="col">
 
+            <br />
+            <br />
 
-    <div>
+            <hr />
+            <div>
+                <h1 class="Menu">MENU PRINCIPAL</h1>
+            </div>
 
-        <h1 class ="Menu">MENU PRINCIPAL</h1>
-        
-    </div>
+            <div class="Menu scaled">
+                <div class="btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
+                    <asp:Button Text="GESTION PRODUCTOS" OnClick="btn_Proveedor_Click" runat="server" CssClass="btn btn-primary" />
+                    <asp:Button Text="GESTION CLIENTES" OnClick="btn_Proveedor_Click" runat="server" CssClass="btn btn-primary" />
+                    <asp:Button Text="GESTION PROVEEDORES" OnClick="btn_Proveedor_Click" runat="server" CssClass="btn btn-primary" />
+                    <asp:Button Text="GESTIONAR USUARIOS" ID="btn_GestionarUsuarios" runat="server" CssClass="btn btn-primary" />
 
-    <div class="Menu">
-        <div class= "btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
-            <asp:Button Text="Gestion Proveedores" OnClick="btn_Proveedor_Click" runat="server" class="btn btn-success" /> 
-            <button type="button" class="btn btn-secondary">1</button>
-             <button type="button" class="btn btn-secondary">2</button>
-
-            <div class="btn-group" role="group">
-                 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                 </button>
-                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="#">Dropdown link</a>
-                    <a class="dropdown-item" href="#">Dropdown link</a>
-                 </div>
+                
+                    <div class="btn-group dropend">
+                        <a class="btn btn-primary " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-offset="0,-100" aria-expanded="false">VARIOS</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">RUBROS</a></li>
+                            <li><a class="dropdown-item" href="#">MARCAS</a></li>
+                            <li><a class="dropdown-item" href="#">MEDIOS DE PAGO</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <div class="col-3"></div>
     </div>
+
 
 </asp:Content>

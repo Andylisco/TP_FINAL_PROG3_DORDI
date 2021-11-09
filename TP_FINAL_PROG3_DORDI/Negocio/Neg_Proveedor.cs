@@ -160,7 +160,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("DELETE FROM Proveedores WHERE CUIT = " + CUIT + "");
+                datos.setearConsulta("UPDATE Proveedores SET Estado = 0 WHERE CUIT = " + CUIT + "");
                 datos.ejecutarAccion();
             }
             catch (Exception)

@@ -17,11 +17,11 @@ namespace TP_FINAL_PROG3_DORDI
             {
                 btnActualizar.Visible = false;
                 txt_CUIT.MaxLength = 11;
-                txt_RazonSocial.MaxLength = 100;
-                txt_Telefono.MaxLength = 100;
-                txt_Mail.MaxLength = 100;
-                txt_Direccion.MaxLength = 100;
-                txt_PersonaContacto.MaxLength = 100;
+                txt_RazonSocial.MaxLength = 50;
+                txt_Telefono.MaxLength = 20;
+                txt_Mail.MaxLength = 50;
+                txt_Direccion.MaxLength = 50;
+                txt_PersonaContacto.MaxLength = 50;
                 CargarRubros();
 
                 var CuitProv = Request.QueryString["Cuit"] != null ? Request.QueryString["Cuit"].ToString() : "" ;

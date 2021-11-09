@@ -13,6 +13,7 @@ namespace TP_FINAL_PROG3_DORDI
         {
             var Usuario = Session["Usuario"].ToString();
             Saludo.Text = "Hola " + Usuario;
+                       
         }
     }
 }

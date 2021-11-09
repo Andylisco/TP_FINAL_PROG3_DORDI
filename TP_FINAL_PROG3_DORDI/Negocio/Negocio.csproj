@@ -44,6 +44,9 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="NegRubro.cs" />
     <Compile Include="NegUsuario.cs" />
+    <Compile Include="Neg_Cliente.cs" />
+    <Compile Include="Neg_Marca.cs" />
+    <Compile Include="Neg_Producto.cs" />
     <Compile Include="Neg_Proveedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

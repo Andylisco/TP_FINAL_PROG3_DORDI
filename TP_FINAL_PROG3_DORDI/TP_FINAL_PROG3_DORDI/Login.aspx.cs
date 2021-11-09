@@ -34,7 +34,7 @@ namespace TP_FINAL_PROG3_DORDI
                 //FALTA PASAR EL USUARIO A EL RESTO DE LA PAGINA
                 Session.Add("Usuario", User.Nombre);
                 Session.Add("Clave", User.Clave);
-
+                Session.Add("NivelUsuario", User.Nivel);
 
                 Response.Redirect("Default");
             }

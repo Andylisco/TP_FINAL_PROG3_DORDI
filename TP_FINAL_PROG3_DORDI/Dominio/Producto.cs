@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Producto
     {
+        public int ID { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio_U { get; set; }
@@ -16,6 +17,6 @@ namespace Dominio
         public Marca Marca { get; set; }
         public int Stock  { get; set; }
         public int StockMinimo { get; set; }
-        public Proveedor Proveedor { get; set; }
+        public int PorcentajeGanancia { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace TP_FINAL_PROG3_DORDI
 
     public partial class Login
     {
-
         /// <summary>
         /// Control form1.
         /// </summary>
