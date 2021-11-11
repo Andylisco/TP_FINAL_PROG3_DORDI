@@ -23,5 +23,15 @@ namespace TP_FINAL_PROG3_DORDI
         {
             Response.Redirect("Proveedores");
         }
+
+        protected void btn_Producto_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Productos");
+        }
+
+        protected void btn_Cliente_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Productos");
+        }
     }
 }

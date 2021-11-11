@@ -25,13 +25,26 @@ namespace TP_FINAL_PROG3_DORDI
                 CargarRubros();
 
                 var CuitProv = Request.QueryString["Cuit"] != null ? Request.QueryString["Cuit"].ToString() : "" ;
-                if (CuitProv != "")
+                var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
+                if (Tipo == "M")
                 {
-                    CargarProveedor(CuitProv);
-                    btnActualizar.Visible = true;
-                    btnGrabar.Visible = false;
-                    txt_CUIT.Visible = false;
-                    lbl_CUIT.Visible = false;
+                    if (CuitProv != "")
+                    {
+                        CargarProveedor(CuitProv);
+                        btnActualizar.Visible = true;
+                        btnGrabar.Visible = false;
+                        txt_CUIT.Visible = false;
+                        lbl_CUIT.Visible = false;
+                    }
+                }
+                else
+                {
+                    if (Tipo == "E")
+                    {
+                        Neg_Proveedor NegProve = new Neg_Proveedor();
+                        NegProve.DarBaja(CuitProv);
+                        Response.Redirect("Proveedores.aspx");
+                    }
                 }
             }
         }

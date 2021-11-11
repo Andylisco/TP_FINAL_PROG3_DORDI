@@ -4,7 +4,7 @@ RazonSocial varchar(50) not null,
 Telefono varchar(20) null,
 Direccion varchar(50) null,
 Mail varchar(50) null,
-Cod_Rubro int  not null,
+Cod_Rubro varchar(3)  not null,
 PersonaContacto varchar(50) null,
 Estado bit not null
 )
@@ -49,7 +49,7 @@ create table Productos(
 ID bigint primary key identity(1,1),
 Codigo varchar(6) not null,
 Descripcion varchar(50) not null,
-URL_Imagen varchar(50) null,
+URL_Imagen varchar(250) null,
 Cod_Rubro varchar(3) foreign key references Rubros(Codigo),
 Cod_Marca varchar(3) foreign key references Marcas(Codigo),
 Stock int not null default(0) check(Stock >= 0),

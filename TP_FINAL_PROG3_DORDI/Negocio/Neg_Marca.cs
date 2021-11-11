@@ -7,10 +7,9 @@ using Dominio;
 
 namespace Negocio
 {
-    class Neg_Marca
+    public class Neg_Marca
     {
-        public class NegRubro
-        {
+        
             public List<Marca> GetAll()
             {
                 List<Marca> lista = new List<Marca>();
@@ -45,5 +44,5 @@ namespace Negocio
                 }
             }
         }
-    }
+    
 }

@@ -152,7 +152,7 @@ namespace Negocio
 
         }
 
-        public void BorrarArt(string DNI)
+        public void DarBaja(string DNI)
         {
             AccesoDatos datos = new AccesoDatos();
 

@@ -4,6 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
    
 
+     <hr />
+    <hr />
+
+
     <div class="CentrarTitulos">
      <h3>LISTADO CLIENTES</h3>
     </div>
@@ -51,7 +55,10 @@
           <td> <%: Clien.Direccion %></td>
           <td> <%: Clien.FechaUltCompra.ToString("dd/MM/yyyy") %></td>
 
-          <td> <a href="FormCliente.aspx?DNI=<%: Clien.DNI %>" class="btn btn-primary">MODIFICAR</a> </td>
+          <td> <a href="FormCliente.aspx?DNI=<%: Clien.DNI %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+              <%if (NivelUsuario == 0) { %>
+            <td> <a href="FormCliente.aspx?DNI=<%: Clien.DNI %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
+            <%} %>
                
         </tr>
    <% }   %>

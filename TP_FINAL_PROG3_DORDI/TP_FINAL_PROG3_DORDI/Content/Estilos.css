@@ -3,13 +3,30 @@
     justify-content: center;
     align-items: center;
     margin: 15px;
+    padding-top: 3%;
 }
 
 
 .CentrarFormularios {
     display: flex;
     flex-direction: column;
+    justify-content:center;
     align-items: center;
     margin:15px;
 }
 
+.ColorB_N_Dropdowns {
+    color: black !important;
+    background-color: white !important;
+}
+
+.Separador {
+    margin: 7px;
+}
+
+.padearControles {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-inline: 15px;
+}

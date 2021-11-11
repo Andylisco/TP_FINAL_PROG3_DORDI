@@ -14,8 +14,11 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT Codigo, Descripcion, URL_Imagen, Cod_Rubro, Cod_Marca, Stock, Stock_Minimo,"  +
-                                    "PorcentajeGanancias FROM Productos WHERE ID = @ID");
+            Datos.setearConsulta("SELECT P.Codigo, P.Descripcion, P.URL_Imagen, P.Cod_Rubro, P.Cod_Marca, P.Stock, P.Stock_Minimo," +
+                                    "P.PorcentajeGanancia, DescripRubro = R.Descripcion, DescripMarca = M.Descripcion " + 
+                                    "FROM Productos P LEFT JOIN Rubros R ON P.Cod_Rubro = R.Codigo " +
+                                    "LEFT JOIN Marcas M ON P.Cod_Marca = M.Codigo " +
+                                    "WHERE ID = @ID");
 
             Datos.setearParametros("@ID", ID);
 
@@ -50,7 +53,15 @@ namespace Negocio
                 if (!(Datos.Lector["Cod_Rubro"] is DBNull))
                     Produc.Rubro.Codigo = (string)Datos.Lector["Cod_Rubro"];
 
-                Produc.Rubro.Descripcion = "";
+                if (!(Datos.Lector["DescripRubro"] is DBNull))
+                    Produc.Rubro.Descripcion = (string)Datos.Lector["DescripRubro"];
+
+
+                Produc.Marca = new Marca();
+                if (!(Datos.Lector["Cod_Marca"] is DBNull))
+                    Produc.Marca.Codigo = (string)Datos.Lector["Cod_Marca"];
+
+               
 
 
             }
@@ -84,7 +95,7 @@ namespace Negocio
                 {
                     Producto aux = new Producto();
                     
-                    aux.ID = (int)datos.Lector["ID"];
+                    aux.ID = long.Parse(datos.Lector["ID"].ToString());
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.URLimagen = (string)datos.Lector["URL_Imagen"];
@@ -126,7 +137,7 @@ namespace Negocio
 
         }
 
-        public decimal _ObtenerPrecioUnitario(int ID)
+        public decimal _ObtenerPrecioUnitario(long ID)
         {
             decimal PrecioU;
             PrecioU = 0;
@@ -153,33 +164,35 @@ namespace Negocio
                 }
                 else
                 {
-                    //CIERRO LA CONEXION 
-                    datos.cerrarConexion();
+                  
 
-                    //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO                    
-                    datos.setearConsulta("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
-                    datos.setearParametros("@ID", ID);
+                    //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO
+                    AccesoDatos datos2 = new AccesoDatos();
+                    datos2.setearConsulta("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
+                    datos2.setearParametros("@ID", ID);
 
-                    datos.ejecutarLectura();
+                    datos2.ejecutarLectura();
 
 
 
-                    while (datos.Lector.Read())
+                    while (datos2.Lector.Read())
                     {
-                        if (!(datos.Lector["MaxPrecio"] is DBNull))
+                        if (!(datos2.Lector["MaxPrecio"] is DBNull))
                         {
                             PrecioU = (decimal)datos.Lector["MaxPrecio"];
                         }
 
                     }
 
-                    datos.cerrarConexion();
+                    datos2.cerrarConexion();
 
 
                 }
 
                
             }
+            //CIERRO LA CONEXION 
+            datos.cerrarConexion();
 
             return PrecioU;
         }
@@ -200,7 +213,7 @@ namespace Negocio
             datos.setearParametros("@Cod_Rubro", nuevo.Rubro.Codigo);
             datos.setearParametros("@Cod_Marca", nuevo.Marca.Codigo);
             datos.setearParametros("@Stock_Minimo", nuevo.StockMinimo);
-            datos.setearParametros("@PorcentajeGanacia", nuevo.PorcentajeGanancia);
+            datos.setearParametros("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
 
             datos.ejecutarAccion();
 
@@ -214,7 +227,7 @@ namespace Negocio
 
 
             datos.setearConsulta("UPDATE Productos SET Codigo = @Codigo, Descripcion = @Descripcion, URL_Imagen = @URL_Imagen, " +
-                 "@Cod_Rubro = @Cod_Rubro, Cod_Marca = @Cod_Marca, Stock_Minimo = @Stock_Minimo, PorcentajeGanacia = @PorcentajeGanacia " +
+                 "@Cod_Rubro = @Cod_Rubro, Cod_Marca = @Cod_Marca, Stock_Minimo = @Stock_Minimo, PorcentajeGanancia = @PorcentajeGanancia " +
                  "WHERE ID = @ID");
 
             datos.setearParametros("@ID", nuevo.ID);
@@ -224,7 +237,7 @@ namespace Negocio
             datos.setearParametros("@Cod_Rubro", nuevo.Rubro.Codigo);
             datos.setearParametros("@Cod_Marca", nuevo.Marca.Codigo);
             datos.setearParametros("@Stock_Minimo", nuevo.StockMinimo);
-            datos.setearParametros("@PorcentajeGanacia", nuevo.PorcentajeGanancia);
+            datos.setearParametros("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
 
             datos.ejecutarAccion();
 
@@ -238,7 +251,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Producto SET Estado = 0 WHERE ID = " + ID + "");
+                datos.setearConsulta("UPDATE Productos SET Estado = 0 WHERE ID = " + ID + "");
                 datos.ejecutarAccion();
             }
             catch (Exception)

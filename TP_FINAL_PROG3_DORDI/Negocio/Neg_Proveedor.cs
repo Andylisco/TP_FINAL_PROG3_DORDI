@@ -68,7 +68,8 @@ namespace Negocio
                                      " Direccion = ISNULL(Pr.Direccion, ''), Mail = ISNULL(Pr.Mail, '')," +
                                      " PersonaContacto = ISNULL(Pr. PersonaContacto, ''), Pr.Cod_Rubro," +
                                      " RubroDesc = ISNULL(R.Descripcion,'') " +
-                                     "FROM Proveedores Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " + WHERE);
+                                     "FROM Proveedores Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " + 
+                                     "WHERE Estado = 1 " + WHERE);
 
 
 
@@ -154,13 +155,13 @@ namespace Negocio
 
         }
 
-        public void BorrarArt(string CUIT)
+        public void DarBaja(string CUIT)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("UPDATE Proveedores SET Estado = 0 WHERE CUIT = " + CUIT + "");
+                datos.setearConsulta("UPDATE Proveedores SET Estado = 0 WHERE CUIT = '" + CUIT + "'");
                 datos.ejecutarAccion();
             }
             catch (Exception)

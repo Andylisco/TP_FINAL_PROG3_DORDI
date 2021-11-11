@@ -14,8 +14,13 @@ namespace TP_FINAL_PROG3_DORDI
     {
         public List<Cliente> ListaClientes { get; set; }
 
+        public int NivelUsuario { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+
             Neg_Cliente Neg_Clien = new Neg_Cliente();
 
             ListaClientes = Neg_Clien.GetAll();

@@ -23,16 +23,31 @@ namespace TP_FINAL_PROG3_DORDI
                 txt_Direccion.MaxLength = 50;
                 txt_Telefono.MaxLength = 20;
                 txt_EMail.MaxLength = 50;
-                
+                lbl_TituloActualiza.Visible = false;
+
 
                 var DNI = Request.QueryString["DNI"] != null ? Request.QueryString["DNI"].ToString() : "";
-                if (DNI != "")
+                var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
+                if (Tipo == "M")
                 {
-                    CargarCliente(DNI);
-                    btnActualizar.Visible = true;
-                    btnGrabar.Visible = false;
-                    txt_DNI.Visible = false;
-                    lbl_DNI.Visible = false;
+                    if (DNI != "")
+                    {
+                        CargarCliente(DNI);
+                        btnActualizar.Visible = true;
+                        btnGrabar.Visible = false;
+                        txt_DNI.Visible = false;
+                        lbl_DNI.Visible = false;
+                        lbl_TituloActualiza.Visible = true;
+                        lbl_TituloCargar.Visible = false;
+                    }
+                }
+                else {
+                    if (Tipo == "E")
+                    {
+                        Neg_Cliente NegClien = new Neg_Cliente();
+                        NegClien.DarBaja(DNI);
+                        Response.Redirect("Clientes.aspx");
+                    }
                 }
             }
         }

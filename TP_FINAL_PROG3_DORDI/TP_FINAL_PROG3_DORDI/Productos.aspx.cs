@@ -13,11 +13,19 @@ namespace TP_FINAL_PROG3_DORDI
     {
         public List<Producto> ListadoProductos { get; set; }
 
+        public int NivelUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!IsPostBack)
+            { 
             Neg_Producto NegPro = new Neg_Producto();
 
             ListadoProductos = NegPro.GetAll();
+
+                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                
+            }
         }
 
 

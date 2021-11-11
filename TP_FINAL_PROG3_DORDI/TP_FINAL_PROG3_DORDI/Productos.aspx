@@ -53,7 +53,12 @@
           <td> <%: Produc.PorcentajeGanancia %></td>
           <td> <%: Produc.Precio_U %></td>
 
-          <td> <a href="FormProveedor.aspx?Cuit=<%: Produc.ID %>" class="btn btn-primary">MODIFICAR</a> </td>
+          <td> <a href="FormProducto.aspx?ID=<%: Produc.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+            <%if (NivelUsuario == 0) { %>
+            <td> <a href="FormProducto.aspx?ID=<%: Produc.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
+            <%} %>
+                        
+          
                
         </tr>
    <% }   %>

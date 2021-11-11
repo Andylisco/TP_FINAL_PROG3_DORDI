@@ -15,6 +15,24 @@ namespace TP_FINAL_PROG3_DORDI
     {
 
         /// <summary>
+        /// Control lbl_TituloActualiza.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_TituloActualiza;
+
+        /// <summary>
+        /// Control lbl_TituloCargar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_TituloCargar;
+
+        /// <summary>
         /// Control lbl_Codigo.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,24 @@ namespace TP_FINAL_PROG3_DORDI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_Descripcion;
+
+        /// <summary>
+        /// Control lbl_URLImagen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_URLImagen;
+
+        /// <summary>
+        /// Control txt_URLImagen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_URLImagen;
 
         /// <summary>
         /// Control lbl_Rubro.
@@ -139,5 +175,14 @@ namespace TP_FINAL_PROG3_DORDI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnActualizar;
+
+        /// <summary>
+        /// Control IMG_Producto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image IMG_Producto;
     }
 }
