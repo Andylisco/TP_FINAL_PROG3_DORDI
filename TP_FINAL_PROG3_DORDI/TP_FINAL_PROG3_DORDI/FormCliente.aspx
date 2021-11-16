@@ -5,76 +5,113 @@
 
     <script>
 
+       //`` const log = document.getElementById('log');
+       //
+       // document.addEventListener('keypress', logKey);
+       //
+       // function ValidarKeypress() {
+       //     document.onkeypress = logKey;
+       //     var letras = /[A-z]/ig;
+       //     if (letras.test(logKey)) {
+       //         return false;
+       //     } else {
+       //         return true;
+       //     }
+       // }
+
+      //  function logKey(e) {
+      //      log.textContent += ` ${e.code}`;
+      //  }
+      //
         function validar() {
 
-            /* var Codigo = document.getElementById("txt_Codigo").value;
-             console.log(Codigo);
-             var Descripcion = document.getElementById("txt_Descripcion").value;
-             console.log(Descripcion);
-             var Img_URL = document.getElementById('IMG_Producto').src;
-             console.log(Img_URL);
-             var StockMinimo = document.getElementById("txt_StockMinimo").value;
-             console.log(StockMinimo);
-             var PorcentajeGanancia = document.getElementById("txt_PorcentajeGanancia").value;
-             console.log(PorcentajeGanancia);
-            */
+            var Dni = document.getElementById("txt_DNI").value;
+console.log(Dni)
+            var Nombre = document.getElementById("txt_Nombre").value;
+            console.log(Nombre)
+            var Apellido = document.getElementById("txt_Apellido").value;
+            console.log(Apellido)
+            var Direccion = document.getElementById("txt_Direccion").value;
+            console.log(Direccion)
+            var Telefono = document.getElementById("txt_Telefono").value;
+            console.log(Telefono)
+            var Email = document.getElementById("txt_EMail").value;
+            console.log(Email)
+
 
             var Bloquear = true;
 
-            /*
 
-            if (Codigo == "") {
-                
-                document.getElementById("txt_Codigo").classList.remove("is-valid");                
-                document.getElementById("txt_Codigo").classList.add("is-invalid");
-                Bloquear = false;
-            }
-            else
-            {
-                document.getElementById("txt_Codigo").classList.remove("is-invalid");
-                document.getElementById("txt_Codigo").classList.add("is-valid");
-            }
+            var sinGuion = /[\-]/ig;
 
-            if (Descripcion == "") {
-                document.getElementById("txt_Descripcion").classList.remove("is-valid");
-                document.getElementById("txt_Descripcion").classList.add("is-invalid");
+            if (Dni == "" || sinGuion.test(Dni)) {
+
+                document.getElementById("txt_DNI").classList.remove("is-valid");
+                document.getElementById("txt_DNI").classList.add("is-invalid");
                 Bloquear = false;
             }
             else {
-                document.getElementById("txt_Descripcion").classList.remove("is-invalid");
-                document.getElementById("txt_Descripcion").classList.add("is-valid");
+                document.getElementById("txt_DNI").classList.remove("is-invalid");
+                document.getElementById("txt_DNI").classList.add("is-valid");
             }
 
-            if (Img_URL === "" || Img_URL === "https://png.pngtree.com/png-vector/20210702/ourlarge/pngtree-error-404-page-not-found-website-png-image_3545448.jpg") {
-                document.getElementById("txt_URLImagen").classList.remove("is-valid");
-                document.getElementById("txt_URLImagen").classList.add("is-invalid");
+            if (Nombre == "") {
+                document.getElementById("txt_Nombre").classList.remove("is-valid");
+                document.getElementById("txt_Nombre").classList.add("is-invalid");
                 Bloquear = false;
             }
             else {
-                document.getElementById("txt_URLImagen").classList.remove("is-invalid");
-                document.getElementById("txt_URLImagen").classList.add("is-valid");
+                document.getElementById("txt_Nombre").classList.remove("is-invalid");
+                document.getElementById("txt_Nombre").classList.add("is-valid");
             }
 
-            if (StockMinimo < 1) {
-                document.getElementById("txt_StockMinimo").classList.remove("is-valid");
-                document.getElementById("txt_StockMinimo").classList.add("is-invalid");
+            if (Apellido == "") {
+                document.getElementById("txt_Apellido").classList.remove("is-valid");
+                document.getElementById("txt_Apellido").classList.add("is-invalid");
                 Bloquear = false;
             }
             else {
-                document.getElementById("txt_StockMinimo").classList.remove("is-invalid");
-                document.getElementById("txt_StockMinimo").classList.add("is-valid");
+                document.getElementById("txt_Apellido").classList.remove("is-invalid");
+                document.getElementById("txt_Apellido").classList.add("is-valid");
             }
 
-            if (PorcentajeGanancia <= 100) {
-                document.getElementById("txt_PorcentajeGanancia").classList.remove("is-valid");
-                document.getElementById("txt_PorcentajeGanancia").classList.add("is-invalid");
+            if (Direccion == "") {
+                document.getElementById("txt_Direccion").classList.remove("is-valid");
+                document.getElementById("txt_Direccion").classList.add("is-invalid");
                 Bloquear = false;
             }
             else {
-                document.getElementById("txt_PorcentajeGanancia").classList.remove("is-invalid");
-                document.getElementById("txt_PorcentajeGanancia").classList.add("is-valid");
+                document.getElementById("txt_Direccion").classList.remove("is-invalid");
+                document.getElementById("txt_Direccion").classList.add("is-valid");
             }
-            */
+
+            if (Telefono == "") {
+                document.getElementById("txt_Telefono").classList.remove("is-valid");
+                document.getElementById("txt_Telefono").classList.add("is-invalid");
+                Bloquear = false;
+            }
+            else {
+                document.getElementById("txt_Telefono").classList.remove("is-invalid");
+                document.getElementById("txt_Telefono").classList.add("is-valid");
+            }
+
+
+
+             var emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            console.log(emailRegex)
+            //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+            if (!emailRegex.test(Email)) {
+                //invalido
+                document.getElementById("txt_EMail").classList.remove("is-valid");
+                document.getElementById("txt_EMail").classList.add("is-invalid");
+                Bloquear = false;
+            } else {
+                //valido
+                document.getElementById("txt_EMail").classList.remove("is-invalid");
+                document.getElementById("txt_EMail").classList.add("is-valid");
+            }
+
+
 
             return Bloquear;
         }
@@ -94,34 +131,43 @@
         <div class=" col-md-4 offset-md-4 CentrarFormularios">
 
             <div class="Separador">
-                <asp:Label ID="lbl_DNI" runat="server" for="txt_DNI" CssClass="form-label" Font-Bold="true" Text="DNI" />
-                <asp:TextBox ID="txt_DNI" runat="server" CssClass="form-control" aria-describedby="lbl_ayudaDNI" OnTextChanged="txt_DNI_TextChanged" AutoPostBack="true" />
-                <asp:Label ID="lbl_ayudaDNI" runat="server" Text="Ingrese el Numero sin '-'" ForeColor="OrangeRed" Visible="false" />
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="lbl_DNI" runat="server" for="txt_DNI" CssClass="form-label" Font-Bold="true" Text="DNI" />
+                        <asp:TextBox ID="txt_DNI" runat="server" CssClass="form-control" ClientIDMode="Static" aria-describedby="lbl_ayudaDNI" OnTextChanged="txt_DNI_TextChanged" AutoPostBack="true" />
+                        <asp:Label ID="lbl_ayudaDNI" runat="server" Text="Ingrese el Numero sin '-'" ForeColor="OrangeRed" Visible="false" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
 
             <div class="Separador w-100">
                 <asp:Label ID="lbl_Nombre" runat="server" for="txt_Nombre" CssClass="form-label" Font-Bold="true" Text="Nombre"></asp:Label>
-                <asp:TextBox ID="txt_Nombre" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txt_Nombre" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                 <asp:Label ID="lbl_AyudaNombre" runat="server" Text="El Nombre no puede estar vacio." ForeColor="OrangeRed" Visible="false" />
             </div>
 
             <div class="Separador w-100">
                 <asp:Label ID="lbl_Apellido" runat="server" for="txt_Apellido" CssClass="form-label" Font-Bold="true" Text="Apellido"></asp:Label>
-                <asp:TextBox ID="txt_Apellido" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txt_Apellido" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="lbl_ayudaApellido" runat="server" Text="El Apellido no puede estar vacio." ForeColor="OrangeRed" Visible="false" />
             </div>
 
             <div class="Separador w-100">
                 <asp:Label ID="lbl_Direccion" runat="server" for="txt_Direccion" CssClass="form-label" Font-Bold="true" Text="Direccion"></asp:Label>
-                <asp:TextBox ID="txt_Direccion" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txt_Direccion" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                 <asp:Label ID="lbl_AyudaDireccion" runat="server" Text="La direccion no puede estar vacio." ForeColor="OrangeRed" Visible="false" />
             </div>
 
             <div class="Separador w-100">
                 <asp:Label runat="server" for="txt_Telefono" CssClass="form-label" Font-Bold="true" Text="Telefono"></asp:Label>
-                <asp:TextBox ID="txt_Telefono" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txt_Telefono" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                 <asp:Label ID="lbl_AyudaTelefono" runat="server" Text="El Nombre no puede estar vacio." ForeColor="OrangeRed" Visible="false" />
             </div>
 
             <div class="Separador w-100">
                 <asp:Label runat="server" for="txt_EMail" CssClass="form-label" Font-Bold="true" Text="Direccion Email"></asp:Label>
-                <asp:TextBox ID="txt_EMail" runat="server" type="email" CssClass="form-control " aria-describedby="emailHelp"></asp:TextBox>
+                <asp:TextBox ID="txt_EMail" runat="server" type="email" ClientIDMode="Static" CssClass="form-control " aria-describedby="lbl_AyudaEmail"></asp:TextBox>
+                <asp:Label ID="lbl_AyudaEmail" runat="server" Text="El Email no cumple con le formato correcto." ForeColor="OrangeRed" Visible="false" />
             </div>
 
 

@@ -15,6 +15,7 @@ namespace TP_FINAL_PROG3_DORDI
             if (NivelU != 0)
             {
                 btn_GestionarUsuarios.Visible = false;
+                DropDownVarios.Visible = false;
             }
         }
 
@@ -31,7 +32,12 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btn_Cliente_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Productos");
+            Response.Redirect("Clientes");
+        }
+
+        protected void btn_Compras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Clientes");
         }
     }
 }

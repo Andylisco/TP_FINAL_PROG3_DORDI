@@ -30,16 +30,25 @@ namespace TP_FINAL_PROG3_DORDI
 
                 var IDProduc = Request.QueryString["ID"] != null ? Request.QueryString["ID"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
-                if (Tipo == "M")
+                if (Tipo == "M" || Tipo == "V")
                 {
                     if (IDProduc != "")
                     {
                         CargarProducto(int.Parse(IDProduc));
-                        btnActualizar.Visible = true;
-                        btnGrabar.Visible = false;
+                        
                         txt_URLImagen_TextChanged(null,null);
-                        lbl_TituloCargar.Visible = false;
-                        lbl_TituloActualiza.Visible = true;
+                        
+                        if (Tipo == "V")
+                        {
+                            _MarcarSoloLectura();
+                        }
+                        else
+                        {
+                            lbl_TituloCargar.Visible = false;
+                            lbl_TituloActualiza.Visible = true;
+                            btnActualizar.Visible = true;
+                            btnGrabar.Visible = false;
+                        }
 
                     }
                 }
@@ -53,6 +62,19 @@ namespace TP_FINAL_PROG3_DORDI
                     }
                 }
             }
+        }
+        private void _MarcarSoloLectura()
+        {
+            txt_Codigo.ReadOnly = true;
+            txt_Descripcion.ReadOnly = true;
+            txt_PorcentajeGanancia.ReadOnly = true;
+            txt_StockMinimo.ReadOnly = true;
+            txt_URLImagen.ReadOnly = true;
+            cbx_Marca.Enabled = false;
+            cbx_Rubro.Enabled = false;
+
+            btnGrabar.Visible = false;
+
         }
 
         protected void CargarRubros()
@@ -126,7 +148,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-              Neg_Producto negocio = new Neg_Producto();
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
+            Neg_Producto negocio = new Neg_Producto();
 
 
                Producto Produc = new Producto();

@@ -22,19 +22,29 @@ namespace TP_FINAL_PROG3_DORDI
                 txt_Mail.MaxLength = 50;
                 txt_Direccion.MaxLength = 50;
                 txt_PersonaContacto.MaxLength = 50;
+                lbl_TituloActualiza.Visible = false;
                 CargarRubros();
 
                 var CuitProv = Request.QueryString["Cuit"] != null ? Request.QueryString["Cuit"].ToString() : "" ;
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
-                if (Tipo == "M")
+                if (Tipo == "M" || Tipo == "V")
                 {
                     if (CuitProv != "")
                     {
                         CargarProveedor(CuitProv);
-                        btnActualizar.Visible = true;
-                        btnGrabar.Visible = false;
-                        txt_CUIT.Visible = false;
-                        lbl_CUIT.Visible = false;
+                        
+                        if (Tipo == "V")
+                        {
+                            _MarcarSoloLectura();
+                        }
+                        else {
+                            btnActualizar.Visible = true;
+                            btnGrabar.Visible = false;
+                            txt_CUIT.Visible = false;
+                            lbl_CUIT.Visible = false;
+                            lbl_TituloCargar.Visible = false;
+                            lbl_TituloActualiza.Visible = true;
+                        }
                     }
                 }
                 else
@@ -49,6 +59,19 @@ namespace TP_FINAL_PROG3_DORDI
             }
         }
 
+        private void _MarcarSoloLectura()
+        {
+            txt_CUIT.ReadOnly = true;
+            txt_RazonSocial.ReadOnly = true;
+            txt_Direccion.ReadOnly = true;
+            txt_Telefono.ReadOnly = true;
+            txt_Mail.ReadOnly = true;
+            txt_PersonaContacto.ReadOnly = true;
+            cbx_Rubro.Enabled = false;
+
+            btnGrabar.Visible = false;
+
+        }
 
         protected void CargarRubros()
         {

@@ -11,7 +11,7 @@ namespace TP_FINAL_PROG3_DORDI
 {
 
 
-    public partial class FormCliente
+    public partial class FormCompras
     {
 
         /// <summary>
@@ -33,148 +33,112 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.Label lbl_TituloCargar;
 
         /// <summary>
-        /// Control lbl_DNI.
+        /// Control lbl_NroFactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_DNI;
+        protected global::System.Web.UI.WebControls.Label lbl_NroFactura;
 
         /// <summary>
-        /// Control txt_DNI.
+        /// Control txt_NroFactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_DNI;
+        protected global::System.Web.UI.WebControls.TextBox txt_NroFactura;
 
         /// <summary>
-        /// Control lbl_ayudaDNI.
+        /// Control lbl_Fecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ayudaDNI;
+        protected global::System.Web.UI.WebControls.Label lbl_Fecha;
 
         /// <summary>
-        /// Control lbl_Nombre.
+        /// Control txt_Fecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Nombre;
+        protected global::System.Web.UI.WebControls.TextBox txt_Fecha;
 
         /// <summary>
-        /// Control txt_Nombre.
+        /// Control lbl_CUITProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Nombre;
+        protected global::System.Web.UI.WebControls.Label lbl_CUITProv;
 
         /// <summary>
-        /// Control lbl_AyudaNombre.
+        /// Control txt_CUITProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaNombre;
+        protected global::System.Web.UI.WebControls.TextBox txt_CUITProv;
 
         /// <summary>
-        /// Control lbl_Apellido.
+        /// Control lbl_DescpProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Apellido;
+        protected global::System.Web.UI.WebControls.Label lbl_DescpProv;
 
         /// <summary>
-        /// Control txt_Apellido.
+        /// Control txt_DescpProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Apellido;
+        protected global::System.Web.UI.WebControls.TextBox txt_DescpProv;
 
         /// <summary>
-        /// Control lbl_ayudaApellido.
+        /// Control lbl_TipoFactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ayudaApellido;
+        protected global::System.Web.UI.WebControls.Label lbl_TipoFactura;
 
         /// <summary>
-        /// Control lbl_Direccion.
+        /// Control cbx_TipoFactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Direccion;
+        protected global::System.Web.UI.WebControls.DropDownList cbx_TipoFactura;
 
         /// <summary>
-        /// Control txt_Direccion.
+        /// Control lbl_MedioPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Direccion;
+        protected global::System.Web.UI.WebControls.Label lbl_MedioPago;
 
         /// <summary>
-        /// Control lbl_AyudaDireccion.
+        /// Control cbx_MedioPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaDireccion;
-
-        /// <summary>
-        /// Control txt_Telefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Telefono;
-
-        /// <summary>
-        /// Control lbl_AyudaTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaTelefono;
-
-        /// <summary>
-        /// Control txt_EMail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_EMail;
-
-        /// <summary>
-        /// Control lbl_AyudaEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaEmail;
+        protected global::System.Web.UI.WebControls.DropDownList cbx_MedioPago;
 
         /// <summary>
         /// Control btnGrabar.

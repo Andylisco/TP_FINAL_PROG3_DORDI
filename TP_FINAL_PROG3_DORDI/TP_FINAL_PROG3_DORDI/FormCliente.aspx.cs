@@ -28,17 +28,25 @@ namespace TP_FINAL_PROG3_DORDI
 
                 var DNI = Request.QueryString["DNI"] != null ? Request.QueryString["DNI"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
-                if (Tipo == "M")
+                if (Tipo == "M" || Tipo == "V")
                 {
                     if (DNI != "")
                     {
                         CargarCliente(DNI);
-                        btnActualizar.Visible = true;
-                        btnGrabar.Visible = false;
-                        txt_DNI.Visible = false;
-                        lbl_DNI.Visible = false;
-                        lbl_TituloActualiza.Visible = true;
-                        lbl_TituloCargar.Visible = false;
+                       
+                        if (Tipo == "V")
+                        {
+                            _MarcarSoloLectura();
+                        }
+                        else {
+                            btnActualizar.Visible = true;
+                            btnGrabar.Visible = false;
+                            txt_DNI.Visible = false;
+                            lbl_DNI.Visible = false;
+                            lbl_TituloActualiza.Visible = true;
+                            lbl_TituloCargar.Visible = false;
+                        }
+
                     }
                 }
                 else {
@@ -53,6 +61,18 @@ namespace TP_FINAL_PROG3_DORDI
         }
 
 
+        private void _MarcarSoloLectura()
+        {
+            txt_DNI.ReadOnly = true;
+            txt_Apellido.ReadOnly = true;
+            txt_Nombre.ReadOnly = true;
+            txt_Direccion.ReadOnly = true;
+            txt_Telefono.ReadOnly = true;
+            txt_EMail.ReadOnly = true;
+
+            btnGrabar.Visible = false;
+           
+        }
 
 
         protected void CargarCliente(string DNI)
@@ -76,6 +96,12 @@ namespace TP_FINAL_PROG3_DORDI
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
 
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
 
             Neg_Cliente NegCli = new Neg_Cliente();
 
@@ -99,6 +125,14 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             Neg_Cliente NegCli = new Neg_Cliente();
 
 

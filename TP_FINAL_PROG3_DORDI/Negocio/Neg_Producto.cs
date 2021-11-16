@@ -99,7 +99,7 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.URLimagen = (string)datos.Lector["URL_Imagen"];
-                    aux.Stock = (int)datos.Lector["Stock"];
+                    aux.Stock = _ObtenerStock(aux.ID);
                     aux.StockMinimo = (int)datos.Lector["Stock_Minimo"];
                     aux.PorcentajeGanancia = (int)datos.Lector["PorcentajeGanancia"];
 
@@ -135,6 +135,44 @@ namespace Negocio
 
 
 
+        }
+
+        public int _ObtenerStock(long ID)
+        {
+            int stock = 0;
+
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.setearConsulta("SELECT StockCompras = SUM(Cantidad) FROM Compras WHERE ID_Producto = @ID_Producto AND Estado = 1");
+            datos.setearParametros("@ID_Producto", ID);
+
+            datos.ejecutarLectura();
+
+
+
+            while (datos.Lector.Read())
+            {
+                if (!(datos.Lector["StockCompras"] is DBNull))
+                {
+                    stock += (int)datos.Lector["StockCompras"];
+                }
+            }
+
+            //DESCOMENTAR DESPUES DE CREAR VENTAS
+          /*  AccesoDatos datos2 = new AccesoDatos();
+
+            datos2.setearConsulta("SELECT StockVentas = SUM(Cantidad) FROM Ventas WHERE ID_Producto = @ID_Producto AND Estado = 1");
+            datos2.setearParametros("@ID_Producto", ID);
+
+            while (datos2.Lector.Read())
+            {
+                if (!(datos2.Lector["StockVentas"] is DBNull))
+                {
+                    stock -= (int)datos2.Lector["StockVentas"];
+                }
+            }*/
+
+            return stock;
         }
 
         public decimal _ObtenerPrecioUnitario(long ID)
@@ -179,7 +217,7 @@ namespace Negocio
                     {
                         if (!(datos2.Lector["MaxPrecio"] is DBNull))
                         {
-                            PrecioU = (decimal)datos.Lector["MaxPrecio"];
+                            PrecioU = (decimal)datos2.Lector["MaxPrecio"];
                         }
 
                     }

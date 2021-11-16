@@ -115,7 +115,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Estilos.css" />
+    <Content Include="EditarItemComp.aspx" />
     <Content Include="FormCliente.aspx" />
+    <Content Include="FormCompras.aspx" />
     <Content Include="FormProducto.aspx" />
     <Content Include="Imagenes\Comercio.jpg" />
     <Content Include="Imagenes\Depocito.png" />
@@ -265,12 +267,26 @@
     <Compile Include="Clientes.aspx.designer.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditarItemComp.aspx.cs">
+      <DependentUpon>EditarItemComp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarItemComp.aspx.designer.cs">
+      <DependentUpon>EditarItemComp.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormCliente.aspx.cs">
       <DependentUpon>FormCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FormCliente.aspx.designer.cs">
       <DependentUpon>FormCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormCompras.aspx.cs">
+      <DependentUpon>FormCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormCompras.aspx.designer.cs">
+      <DependentUpon>FormCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormProducto.aspx.cs">
       <DependentUpon>FormProducto.aspx</DependentUpon>

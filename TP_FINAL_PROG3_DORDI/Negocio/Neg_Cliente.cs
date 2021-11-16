@@ -158,7 +158,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Clientes SET Estado = 0 WHERE DNI = " + DNI + "");
+                datos.setearConsulta("UPDATE Clientes SET Estado = 0 WHERE DNI = '" + DNI + "'");
                 datos.ejecutarAccion();
             }
             catch (Exception)

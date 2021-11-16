@@ -13,7 +13,10 @@
     <hr />
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <%if (NivelUsuario == 0)
+            { %>
         <a href="/FormProveedor" class="btn btn-primary">AGREGAR PROVEEDOR</a>
+        <% }   %>
         <button type="button" class="btn btn-secondary">2</button>
 
         <!--<div class="btn-group" role="group">
@@ -53,9 +56,10 @@
                 <td><%: Prov.Rubro.Descripcion %></td>
                 <td><%: Prov.PersonaContacto %></td>
 
-                <td><a href="FormProveedor.aspx?Cuit=<%: Prov.CUIT %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+                <td><a href="FormProveedor.aspx?Cuit=<%: Prov.CUIT %>&Mod=V" class="btn btn-primary">VER PROV.</a> </td>
                 <%if (NivelUsuario == 0)
                     { %>
+                <td><a href="FormProveedor.aspx?Cuit=<%: Prov.CUIT %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
                 <td><a href="FormProveedor.aspx?Cuit=<%: Prov.CUIT %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
                 <%} %>
             </tr>

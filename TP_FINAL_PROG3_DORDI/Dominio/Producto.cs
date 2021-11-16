@@ -12,6 +12,7 @@ namespace Dominio
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio_U { get; set; }
+        public int Cantidad_Compra { get; set; }
         public string URLimagen { get; set; }
         public Rubro Rubro { get; set; }
         public Marca Marca { get; set; }

@@ -39,15 +39,21 @@
                     <asp:Button Text="GESTION CLIENTES" OnClick="btn_Cliente_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTION PROVEEDORES" OnClick="btn_Proveedor_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTIONAR USUARIOS" ID="btn_GestionarUsuarios" runat="server" CssClass="btn btn-primary" />
+                     <asp:Button Text="GESTIONAR COMPRAS" ID="btn_Compras" OnClick="btn_Compras_Click" runat="server" CssClass="btn btn-primary" />
 
 
                     <div class="btn-group dropend">
-                        <a class="btn btn-primary " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-offset="0,-100" aria-expanded="false">VARIOS</a>
+                        <asp:DropDownList runat="server" cssclass="btn btn-primary " id="DropDownVarios" data-bs-toggle="dropdown" data-bs-offset="0,-100" aria-expanded="false">
+                            <asp:ListItem Text="RUBROS"/>
+                            <asp:ListItem Text="MARCAS"/>
+                            <asp:ListItem Text="MEDIOS DE PAGO"/>
+                        </asp:DropDownList>
+                        <!--<a cssclass="btn btn-primary " id="DropDownVarios" data-bs-toggle="dropdown" data-bs-offset="0,-100" aria-expanded="false" href="#" role="button" >VARIOS</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">RUBROS</a></li>
                             <li><a class="dropdown-item" href="#">MARCAS</a></li>
                             <li><a class="dropdown-item" href="#">MEDIOS DE PAGO</a></li>
-                        </ul>
+                        </ul>-->
                     </div>
                 </div>
             </div>

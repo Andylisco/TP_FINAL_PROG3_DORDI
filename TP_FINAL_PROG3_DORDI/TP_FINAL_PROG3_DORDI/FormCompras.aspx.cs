@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Negocio;
+using Dominio;
+
+namespace TP_FINAL_PROG3_DORDI
+{
+    public partial class FormCompras : System.Web.UI.Page
+    {
+        public List<Producto> ListaProductos { get; set; }
+        public int NivelUsuario { get; set; }
+
+        public string TipoVista  { get; set; }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+
+                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+
+                ListaProductos = new List<Producto>();
+
+                cbx_TipoFactura.Items.Add("A");
+                cbx_TipoFactura.Items.Add("B");
+                cbx_TipoFactura.Items.Add("C");
+
+                btnActualizar.Visible = false;
+                /* txt_Codigo.MaxLength = 6;
+                 txt_Descripcion.MaxLength = 50;
+                 txt_URLImagen.MaxLength = 250;
+                 txt_StockMinimo.MaxLength = 20;
+                 txt_PorcentajeGanancia.MaxLength = 4;
+                 cbx_Rubro.SelectedIndex = 0;
+                 cbx_Marca.SelectedIndex = 0;*/
+                lbl_TituloActualiza.Visible = false;
+
+                CargarMediosPagos();
+                /*
+                CargarMarcas();*/
+
+                var Nro = Request.QueryString["Nro"] != null ? Request.QueryString["Nro"].ToString() : "";
+                var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
+
+                TipoVista = Tipo.ToString();
+
+                if (Tipo == "M" || Tipo == "RM" || Tipo == "V")
+                {
+                    if (Nro != "")
+                    {
+                        _CargarCompra(int.Parse(Nro));
+
+                        
+                        if (Tipo == "V")
+                        {
+                            _MarcarSoloLectura();
+                           
+                        }
+                        else
+                        {
+                            btnActualizar.Visible = true;
+                            btnGrabar.Visible = false;
+                            lbl_TituloActualiza.Visible = true;
+                            lbl_TituloCargar.Visible = false;
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (Tipo == "E")
+                    {
+                        Neg_Compra NegComp = new Neg_Compra();
+                        NegComp.DarBaja(int.Parse(Nro));
+                        Response.Redirect("Clientes.aspx");
+                    }
+                }
+            }
+        }
+
+        private void _CargarLista(Compra Comp)
+        {
+            foreach (Producto Prod in Comp.Productos)
+            {
+                ListaProductos.Add((Producto)Prod);
+            }
+            Session.Add("ListaProductosCompra", ListaProductos);
+        }
+
+        private void _CargarFromLista()
+        {
+            ListaProductos =(List<Producto>)Session["ListaProductosCompra"];
+        }
+
+        private void _CargarCompra(int Nro)
+        {
+            Neg_Compra Ng_Comp = new Neg_Compra();
+            Compra Comp = Ng_Comp.GetSingle(Nro);
+
+            txt_NroFactura.Text = Nro.ToString();
+            txt_CUITProv.Text = Comp.Proveedor.CUIT;
+            txt_DescpProv.Text = Comp.Proveedor.RazonSocial;
+            txt_Fecha.Text = Comp.Fecha.ToString("dd/MM/yyyy");
+
+            cbx_MedioPago.SelectedValue = Comp.Medio_Pago.Codigo;
+
+            cbx_TipoFactura.SelectedItem.Text = Comp.TipoFactura;
+
+            if (TipoVista == "RM")
+            {
+                _CargarFromLista();
+            }
+            else
+            { 
+                _CargarLista(Comp);
+            }
+
+            Session.Add("Compra", Comp);
+
+        }
+
+        private void _MarcarSoloLectura()
+        {
+            txt_CUITProv.ReadOnly = true;
+            
+
+                
+
+        }
+        protected void CargarMediosPagos()
+        {
+            Neg_MedioPago NegMedPag = new Neg_MedioPago();
+            cbx_MedioPago.DataSource = NegMedPag.GetAll();
+            cbx_MedioPago.DataValueField = "Codigo";
+            cbx_MedioPago.DataTextField = "Descripcion";
+            cbx_MedioPago.DataBind();
+        }
+
+        protected void btnGrabar_Click(object sender, EventArgs e)
+        { 
+        }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void AgregarProd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EditarItemComp");
+        }
+    }
+}

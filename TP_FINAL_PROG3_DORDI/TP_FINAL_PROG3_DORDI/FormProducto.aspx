@@ -78,23 +78,6 @@
     </script>
    
 
-    <style>
-
-        .AlinearCbx {
-            display: flex;
-            align-items: center;
-        }
-
-        .AlinearConImagen {
-            display: flex;
-            align-items: center;
-        }
-
-   
-
-       
-    </style>
-
     <hr />
     <hr />
 

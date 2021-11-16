@@ -30,3 +30,14 @@
     justify-content: flex-start;
     padding-inline: 15px;
 }
+
+
+.AlinearCbx {
+    display: flex;
+    align-items: center;
+}
+
+.AlinearConImagen {
+    display: flex;
+    align-items: center;
+}

@@ -6,7 +6,7 @@ Direccion varchar(50) null,
 Mail varchar(50) null,
 Cod_Rubro varchar(3)  not null,
 PersonaContacto varchar(50) null,
-Estado bit not null
+Estado bit not null default(1)
 )
 
 create table Rubros(
@@ -60,7 +60,8 @@ Estado bit not null default(1)
 )
 
 Create table Compras(
-Nro_Factura int primary key identity(1,1),
+ID int primary key identity(1,1),
+Nro_Factura int not null,
 Renglon int not null,
 CUIT_Prov varchar(11) foreign key references Proveedores(Cuit),
 Fecha date not null,
