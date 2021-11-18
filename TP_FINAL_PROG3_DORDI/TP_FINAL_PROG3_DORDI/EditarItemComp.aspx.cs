@@ -34,6 +34,9 @@ namespace TP_FINAL_PROG3_DORDI
                 CargarRubros();
                 CargarMarcas();
 
+                cbxActualizar_SelectedIndexChanged(null,null);
+
+
                 var ID = Request.QueryString["ID"] != null ? Request.QueryString["ID"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
 
@@ -78,12 +81,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void _CargarItem(int ID)
         {
+            Neg_Producto NegProd = new Neg_Producto();
+
             foreach (Producto Prod in ListaProductos)
             {
                 if (Prod.ID == ID)
                 {
-                    cbx_Rubro.SelectedValue = Prod.Rubro.Codigo;
-                    cbx_Marca.SelectedValue = Prod.Marca.Codigo;
+                    cbx_Rubro.SelectedValue = NegProd._ObtenerCodigoRubro_XID((int)Prod.ID);
+                    cbx_Marca.SelectedValue = NegProd._ObtenerCodigoMarca_XID((int)Prod.ID);
+                    cbxActualizar_SelectedIndexChanged(null, null);
                     cbx_Producto.SelectedValue = Prod.Codigo;
                     txt_Cantidad.Text = Prod.Cantidad_Compra.ToString();
                     txt_Precio.Text = Prod.Precio_U.ToString();
@@ -105,13 +111,61 @@ namespace TP_FINAL_PROG3_DORDI
             ListaProductos.Remove(ProductoSacar);
             //ACTUALIZO LA LISTA SE SESSION
             Session.Add("ListaProductosCompra", ListaProductos);
-            //VUELVO A LA PAGINA DE LA COMPRA
+
+            if (CompActual == null)
+            {
+                //VUELVO A LA PAGINA DE COMPRA NUEVA
+                Response.Redirect("FormCompras?Mod=NA");
+            }
+            else { 
+            //VUELVO A LA PAGINA DE LA COMPRA DE MODIFICAR
             Response.Redirect("FormCompras?Nro=" + CompActual.Nro + "&Mod=RM");
+            }
         }
 
         protected void Agregar_Click(object sender, EventArgs e)
         {
+            if (ListaProductos == null)
+            {
+                ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
+
+                if (ListaProductos == null)
+                {
+                    //SI SIGUE SIENDO NULL, CARGO UNA LISTA NUEVA
+                    ListaProductos = new List<Producto>();
+                }
+            }
+       
+
+
+            Producto Prod = new Producto();
+            Neg_Producto NegProd = new Neg_Producto();
+
+            Prod = NegProd.GetSingle(int.Parse(cbx_Producto.SelectedValue));
+            /*Prod.ID = long.Parse(cbx_Producto.SelectedValue);
+            Prod.Codigo = 
+            Prod.Descripcion = cbx_Producto.Text;*/
+            Prod.Cantidad_Compra = int.Parse(txt_Cantidad.Text);
+            Prod.Precio_U = decimal.Parse(txt_Precio.Text);
+
+
+            ListaProductos.Add(Prod);
+            Session.Remove("ListaProductosCompra");
             Session.Add("ListaProductosCompra", ListaProductos);
+            Response.Redirect("FormCompras?Mod=NA");
+        }
+
+        protected void cbxActualizar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Neg_Producto NegProd = new Neg_Producto();
+
+                       
+
+            cbx_Producto.DataSource = NegProd.GetAll("AND Cod_Rubro = '" + cbx_Rubro.SelectedValue + "' AND Cod_Marca = '" + cbx_Marca.SelectedValue + "'");
+            cbx_Producto.DataValueField = "ID";
+            cbx_Producto.DataTextField =  "Descripcion";
+            cbx_Producto.DataBind();
+
         }
     }
 }

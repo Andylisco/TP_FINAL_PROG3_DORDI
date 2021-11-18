@@ -22,11 +22,13 @@ namespace TP_FINAL_PROG3_DORDI
 
                 NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
 
-                ListaProductos = new List<Producto>();
+                /*ListaProductos = new List<Producto>();*/
 
                 cbx_TipoFactura.Items.Add("A");
                 cbx_TipoFactura.Items.Add("B");
                 cbx_TipoFactura.Items.Add("C");
+
+                txt_Fecha.Text = DateTime.Today.ToString("dd/MM/yyyy");
 
                 btnActualizar.Visible = false;
                 /* txt_Codigo.MaxLength = 6;
@@ -77,6 +79,19 @@ namespace TP_FINAL_PROG3_DORDI
                         NegComp.DarBaja(int.Parse(Nro));
                         Response.Redirect("Clientes.aspx");
                     }
+                    else
+                    {
+                        if (Tipo == "NA")
+                        { 
+                            txt_CUITProv.Text = Session["CuitProv"].ToString();
+                            txt_CUITProv_TextChanged(null, null);
+                            cbx_TipoFactura.SelectedValue = Session["TipoFac"].ToString();
+                            cbx_MedioPago.SelectedValue = Session["MedPag"].ToString();
+
+                            _CargarFromLista();
+
+                        }
+                    }
                 }
             }
         }
@@ -87,6 +102,7 @@ namespace TP_FINAL_PROG3_DORDI
             {
                 ListaProductos.Add((Producto)Prod);
             }
+
             Session.Add("ListaProductosCompra", ListaProductos);
         }
 
@@ -125,9 +141,7 @@ namespace TP_FINAL_PROG3_DORDI
         private void _MarcarSoloLectura()
         {
             txt_CUITProv.ReadOnly = true;
-            
-
-                
+                           
 
         }
         protected void CargarMediosPagos()
@@ -149,7 +163,48 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void AgregarProd_Click(object sender, EventArgs e)
         {
+            Session.Add("CuitProv", txt_CUITProv.Text);
+            Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
+            Session.Add("MedPag", cbx_MedioPago.SelectedValue);
             Response.Redirect("EditarItemComp");
+        }
+
+        protected void txt_CUITProv_TextChanged(object sender, EventArgs e)
+        {
+           
+
+            if (txt_CUITProv.Text.Length == 11)
+            {
+
+                Neg_Proveedor NegProv = new Neg_Proveedor();
+                Proveedor Prov;
+                try
+                {
+                    Prov = NegProv.GetSingle(txt_CUITProv.Text);
+                    txt_DescpProv.Text = Prov.RazonSocial;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
+
+            if (ListaProductos == null)
+            {
+                ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
+
+                if (ListaProductos == null)
+                {
+                    //SI SIGUE SIENDO NULL, CARGO UNA LISTA NUEVA
+                    ListaProductos = new List<Producto>();
+                }
+            }
+
+            Session.Add("ListaProductosCompra", ListaProductos);
+
+
         }
     }
 }

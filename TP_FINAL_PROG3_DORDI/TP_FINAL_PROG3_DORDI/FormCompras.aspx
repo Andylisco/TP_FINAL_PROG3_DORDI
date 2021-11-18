@@ -31,16 +31,21 @@
                             </div>
                         </div>
 
-                        <div class="AlinearCbx w-100">
-                            <div class="Separador w-100">
-                                <asp:Label ID="lbl_CUITProv" runat="server" for="txt_CUITProv" CssClass="form-label" Font-Bold="true" Text="CUIT Prov."></asp:Label>
-                                <asp:TextBox ID="txt_CUITProv" runat="server" ClientIDMode="Static" CssClass="form-control "></asp:TextBox>
-                            </div>
-                            <div class="Separador w-100">
-                                <asp:Label ID="lbl_DescpProv" runat="server" for="txt_DescpProv" CssClass="form-label" Font-Bold="true" Text="Descp. Prov."></asp:Label>
-                                <asp:TextBox ID="txt_DescpProv" runat="server" ClientIDMode="Static" CssClass="form-control " ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+
+                                <div class="AlinearCbx w-100">
+                                    <div class="Separador w-100">
+                                        <asp:Label ID="lbl_CUITProv" runat="server" for="txt_CUITProv" CssClass="form-label" Font-Bold="true" Text="CUIT Prov."></asp:Label>
+                                        <asp:TextBox ID="txt_CUITProv" runat="server" OnTextChanged="txt_CUITProv_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                    </div>
+                                    <div class="Separador w-100">
+                                        <asp:Label ID="lbl_DescpProv" runat="server" for="txt_DescpProv" CssClass="form-label" Font-Bold="true" Text="Descp. Prov."></asp:Label>
+                                        <asp:TextBox ID="txt_DescpProv" runat="server" ClientIDMode="Static" CssClass="form-control " ReadOnly="true"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
 
 
                         <div class="AlinearCbx ">
@@ -60,13 +65,13 @@
 
 
                         <div class="Separador">
-                            
-                      <%if (TipoVista != "V")
-                          {%>
+
+                            <%if (TipoVista != "V")
+                                {%>
                             <asp:Button Text="GRABAR PRODUCTO" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
 
                             <asp:Button Text="ACTUALIZA PRODUCTO" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
-                         <%} %>
+                            <%} %>
                         </div>
 
                     </div>
@@ -85,10 +90,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%if (ListaProductos.Count > 0)
+                                    <%if ( (ListaProductos != null) && (ListaProductos.Count > 0))
                                         {%>
                                     <%foreach (var Producto in ListaProductos)
-                                        {  %>
+                                        {
+                                           %>
                                     <tr>
                                         <th scope="row"><%:  Producto.Codigo  %>
                                         </td>
@@ -99,13 +105,13 @@
 
 
                                         <%if (NivelUsuario == 0)
-                                          {
+                                            {
                                                 if (TipoVista != "V")
                                                 {%>
-                                                    <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
-                                                    <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
-                                              <%}
-                                          } %>
+                                        <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+                                        <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
+                                        <%}
+                                            } %>
                                     </tr>
                                     <% }
                                         }%>
@@ -115,10 +121,10 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                      <%if (TipoVista != "V")
+                    <%if (TipoVista != "V")
                         {%>
-                            <asp:Button Text="AGREGAR PRODUCTO" runat="server" OnClick="AgregarProd_Click" CssClass="btn btn-primary" />
-                      <%} %>
+                    <asp:Button Text="AGREGAR PRODUCTO" runat="server" OnClick="AgregarProd_Click" CssClass="btn btn-primary" />
+                    <%} %>
                 </div>
             </div>
 

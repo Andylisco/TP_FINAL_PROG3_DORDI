@@ -235,6 +235,54 @@ namespace Negocio
             return PrecioU;
         }
 
+        public string _ObtenerCodigoRubro_XID(int id)
+        {
+            string CodRubro = "";
+
+            AccesoDatos datos = new AccesoDatos();
+            datos.setearConsulta("SELECT Cod_Rubro " +
+                                     "FROM Productos " +
+                                    "WHERE Estado = 1  AND ID = @ID");
+
+            datos.setearParametros("@ID", id);
+
+            datos.ejecutarLectura();
+            while (datos.Lector.Read())
+            {
+
+                if (!(datos.Lector["Cod_Rubro"] is DBNull))
+                {
+                    CodRubro = (string)datos.Lector["Cod_Rubro"];
+                }
+            }
+
+            return CodRubro;
+        }
+
+        public string _ObtenerCodigoMarca_XID(int id)
+        {
+            string CodRubro = "";
+
+            AccesoDatos datos = new AccesoDatos();
+            datos.setearConsulta("SELECT Cod_Marca " +
+                                     "FROM Productos " +
+                                    "WHERE Estado = 1  AND ID = @ID");
+
+            datos.setearParametros("@ID", id);
+
+            datos.ejecutarLectura();
+            while (datos.Lector.Read())
+            {
+
+                if (!(datos.Lector["Cod_Marca"] is DBNull))
+                {
+                    CodRubro = (string)datos.Lector["Cod_Marca"];
+                }
+            }
+
+            return CodRubro;
+        }
+
 
         public void agregar(Producto nuevo)
         {
