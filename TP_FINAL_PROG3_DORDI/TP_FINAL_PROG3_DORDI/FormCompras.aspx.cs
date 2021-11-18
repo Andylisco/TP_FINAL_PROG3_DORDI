@@ -14,7 +14,7 @@ namespace TP_FINAL_PROG3_DORDI
         public List<Producto> ListaProductos { get; set; }
         public int NivelUsuario { get; set; }
 
-        public string TipoVista  { get; set; }
+        public string TipoVista { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -55,11 +55,11 @@ namespace TP_FINAL_PROG3_DORDI
                     {
                         _CargarCompra(int.Parse(Nro));
 
-                        
+
                         if (Tipo == "V")
                         {
                             _MarcarSoloLectura();
-                           
+
                         }
                         else
                         {
@@ -77,12 +77,12 @@ namespace TP_FINAL_PROG3_DORDI
                     {
                         Neg_Compra NegComp = new Neg_Compra();
                         NegComp.DarBaja(int.Parse(Nro));
-                        Response.Redirect("Clientes.aspx");
+                        Response.Redirect("Compras.aspx");
                     }
                     else
                     {
                         if (Tipo == "NA")
-                        { 
+                        {
                             txt_CUITProv.Text = Session["CuitProv"].ToString();
                             txt_CUITProv_TextChanged(null, null);
                             cbx_TipoFactura.SelectedValue = Session["TipoFac"].ToString();
@@ -98,6 +98,12 @@ namespace TP_FINAL_PROG3_DORDI
 
         private void _CargarLista(Compra Comp)
         {
+
+            if (ListaProductos == null)
+            {
+                ListaProductos = new List<Producto>();
+            }
+            
             foreach (Producto Prod in Comp.Productos)
             {
                 ListaProductos.Add((Producto)Prod);
@@ -108,7 +114,7 @@ namespace TP_FINAL_PROG3_DORDI
 
         private void _CargarFromLista()
         {
-            ListaProductos =(List<Producto>)Session["ListaProductosCompra"];
+            ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
         }
 
         private void _CargarCompra(int Nro)
@@ -130,7 +136,7 @@ namespace TP_FINAL_PROG3_DORDI
                 _CargarFromLista();
             }
             else
-            { 
+            {
                 _CargarLista(Comp);
             }
 
@@ -141,7 +147,7 @@ namespace TP_FINAL_PROG3_DORDI
         private void _MarcarSoloLectura()
         {
             txt_CUITProv.ReadOnly = true;
-                           
+
 
         }
         protected void CargarMediosPagos()
@@ -153,8 +159,57 @@ namespace TP_FINAL_PROG3_DORDI
             cbx_MedioPago.DataBind();
         }
 
+       
+
         protected void btnGrabar_Click(object sender, EventArgs e)
-        { 
+        {
+
+            Neg_Compra NgComp = new Neg_Compra();
+            Compra Comp = new Compra();
+
+            try
+            {
+                Comp.Nro = NgComp._ObtenerNumeroNuevo();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            Comp.Fecha = DateTime.Parse(txt_Fecha.Text);
+            Comp.Proveedor = new Proveedor();
+            Comp.Proveedor.CUIT = txt_CUITProv.Text;
+            Comp.TipoFactura = cbx_TipoFactura.SelectedValue;
+            Comp.Usuario = new Usuario();
+            Comp.Usuario.Nombre = Session["Usuario"].ToString();
+            Comp.Medio_Pago = new MedioPago();
+            Comp.Medio_Pago.Codigo = cbx_MedioPago.SelectedValue;
+
+            ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
+
+            Comp.Productos = new List<Producto>();
+
+            foreach (Producto Prod in ListaProductos)
+            {
+                Comp.Productos.Add(Prod);
+            }
+
+            
+
+            try
+            {
+                NgComp.agregar(Comp);
+
+                Response.Redirect("Compras.aspx");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }           
+
+
         }
 
         protected void btnActualizar_Click(object sender, EventArgs e)

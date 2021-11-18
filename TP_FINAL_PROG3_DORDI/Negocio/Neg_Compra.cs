@@ -170,90 +170,124 @@ namespace Negocio
 
         }
 
-       /* public decimal _ObtenerPrecioUnitario(long ID)
-        {
-            decimal PrecioU;
-            PrecioU = 0;
+        /* public decimal _ObtenerPrecioUnitario(long ID)
+         {
+             decimal PrecioU;
+             PrecioU = 0;
 
-            Producto producto = new Producto();
+             Producto producto = new Producto();
+             AccesoDatos datos = new AccesoDatos();
+
+             //BUSCO EL MEJOR PRECiO EN LOS ULTIMOS 3 MESES
+             datos.setearConsulta("SELECT PrecioMaximo3Meses = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID AND Fecha BETWEEN @FechaAtras AND @FechaActual");
+             datos.setearParametros("@ID", ID);
+             datos.setearParametros("@FechaAtras", DateTime.Now.AddMonths(-3));
+             datos.setearParametros("@FechaActual", DateTime.Now);
+
+             datos.ejecutarLectura();
+
+
+
+             while (datos.Lector.Read())
+             {
+
+                 if (!(datos.Lector["PrecioMaximo3Meses"] is DBNull))
+                 {
+                     PrecioU = (decimal)datos.Lector["PrecioMaximo3Meses"];
+                 }
+                 else
+                 {
+
+
+                     //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO
+                     AccesoDatos datos2 = new AccesoDatos();
+                     datos2.setearConsulta("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
+                     datos2.setearParametros("@ID", ID);
+
+                     datos2.ejecutarLectura();
+
+
+
+                     while (datos2.Lector.Read())
+                     {
+                         if (!(datos2.Lector["MaxPrecio"] is DBNull))
+                         {
+                             PrecioU = (decimal)datos.Lector["MaxPrecio"];
+                         }
+
+                     }
+
+                     datos2.cerrarConexion();
+
+
+                 }
+
+
+             }
+             //CIERRO LA CONEXION 
+             datos.cerrarConexion();
+
+             return PrecioU;
+         }*/
+
+        public int _ObtenerNumeroNuevo()
+        {
             AccesoDatos datos = new AccesoDatos();
 
-            //BUSCO EL MEJOR PRECiO EN LOS ULTIMOS 3 MESES
-            datos.setearConsulta("SELECT PrecioMaximo3Meses = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID AND Fecha BETWEEN @FechaAtras AND @FechaActual");
-            datos.setearParametros("@ID", ID);
-            datos.setearParametros("@FechaAtras", DateTime.Now.AddMonths(-3));
-            datos.setearParametros("@FechaActual", DateTime.Now);
+            int NuevoNumero = 0;
+
+            datos.setearConsulta("SELECT Nuevo_Nro_Factura = ISNULL(Max(Nro_Factura),0) FROM Compras");
+
 
             datos.ejecutarLectura();
 
-
-
             while (datos.Lector.Read())
             {
+                NuevoNumero = ((int)datos.Lector["Nuevo_Nro_Factura"] + 1);
+            }
 
-                if (!(datos.Lector["PrecioMaximo3Meses"] is DBNull))
-                {
-                    PrecioU = (decimal)datos.Lector["PrecioMaximo3Meses"];
-                }
-                else
-                {
+                datos.cerrarConexion();
 
+            return NuevoNumero;
+        }
 
-                    //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO
-                    AccesoDatos datos2 = new AccesoDatos();
-                    datos2.setearConsulta("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
-                    datos2.setearParametros("@ID", ID);
+        public void agregar(Compra nueva_Comp)
+        {
+            int Renglon = 0;
 
-                    datos2.ejecutarLectura();
+            foreach (Producto Prod in nueva_Comp.Productos)
+            {
+                Renglon += 1;
 
+                AccesoDatos datos = new AccesoDatos();
 
+                datos.setearConsulta("INSERT INTO Compras(Nro_Factura, Renglon, CUIT_Prov, Fecha, Tipo_Factura,NombreUsuario," +
+                                                            "ID_MedioPago, ID_Producto, Cantidad, PrecioU, Estado)" +
+                                                    "VALUES(@Nro_Factura, @Renglon, @CUIT_Prov, @Fecha, @Tipo_Factura, @NombreUsuario," +
+                                                            "@ID_MedioPago, @ID_Producto, @Cantidad, @PrecioU, @Estado)");
 
-                    while (datos2.Lector.Read())
-                    {
-                        if (!(datos2.Lector["MaxPrecio"] is DBNull))
-                        {
-                            PrecioU = (decimal)datos.Lector["MaxPrecio"];
-                        }
+                datos.setearParametros("@Nro_Factura", nueva_Comp.Nro);
+                datos.setearParametros("@Renglon", Renglon);
+                datos.setearParametros("@CUIT_Prov", nueva_Comp.Proveedor.CUIT);
+                datos.setearParametros("@Fecha", nueva_Comp.Fecha);
+                datos.setearParametros("@Tipo_Factura", nueva_Comp.TipoFactura);
+                datos.setearParametros("@NombreUsuario", nueva_Comp.Usuario.Nombre);
+                datos.setearParametros("@ID_MedioPago", nueva_Comp.Medio_Pago.Codigo);
+                datos.setearParametros("@ID_Producto", Prod.ID);
+                datos.setearParametros("@Cantidad", Prod.Cantidad_Compra);
+                datos.setearParametros("@PrecioU", Prod.Precio_U);
+                datos.setearParametros("@Estado", 1);
 
-                    }
+                datos.ejecutarAccion();
 
-                    datos2.cerrarConexion();
-
-
-                }
+                datos.cerrarConexion();
 
 
             }
-            //CIERRO LA CONEXION 
-            datos.cerrarConexion();
-
-            return PrecioU;
         }
-
-
-        public void agregar(Producto nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-
-
-
-            datos.setearConsulta("INSERT INTO Productos(Codigo, Descripcion, URL_Imagen, Cod_Rubro, Cod_Marca, Stock_Minimo, PorcentajeGanancia)" +
-                                "VALUES(@Codigo, @Descripcion, @URL_Imagen, @Cod_Rubro, @Cod_Marca, @Stock_Minimo, @PorcentajeGanancia)");
-
-            datos.setearParametros("@Codigo", nuevo.Codigo);
-            datos.setearParametros("@Descripcion", nuevo.Descripcion);
-            datos.setearParametros("@URL_Imagen", nuevo.URLimagen);
-            datos.setearParametros("@Cod_Rubro", nuevo.Rubro.Codigo);
-            datos.setearParametros("@Cod_Marca", nuevo.Marca.Codigo);
-            datos.setearParametros("@Stock_Minimo", nuevo.StockMinimo);
-            datos.setearParametros("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
-
-            datos.ejecutarAccion();
-
-            datos.cerrarConexion();
-
-        }
-
+        
+            
+        /*
         public void Actualizar(Compra nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
