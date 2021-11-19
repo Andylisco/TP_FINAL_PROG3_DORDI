@@ -109,8 +109,8 @@
                                             {
                                                 if (TipoVista != "V")
                                                 {%>
-                                        <td><a href="EditarItemVentas.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
-                                        <td><a href="EditarItemVentas.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
+                                        <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+                                        <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
                                         <%}
                                             } %>
                                     </tr>

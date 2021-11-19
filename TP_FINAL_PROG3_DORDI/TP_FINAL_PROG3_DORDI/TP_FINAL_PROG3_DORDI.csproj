@@ -116,6 +116,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Estilos.css" />
     <Content Include="EditarItemComp.aspx" />
+    <Content Include="EditarItemVenta.aspx" />
     <Content Include="FormCliente.aspx" />
     <Content Include="FormCompras.aspx" />
     <Content Include="FormProducto.aspx" />
@@ -274,6 +275,13 @@
     </Compile>
     <Compile Include="EditarItemComp.aspx.designer.cs">
       <DependentUpon>EditarItemComp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarItemVenta.aspx.cs">
+      <DependentUpon>EditarItemVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarItemVenta.aspx.designer.cs">
+      <DependentUpon>EditarItemVenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormCliente.aspx.cs">
       <DependentUpon>FormCliente.aspx</DependentUpon>

@@ -291,10 +291,10 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void AgregarProd_Click(object sender, EventArgs e)
         {
-            /* Session.Add("CuitProv", txt_CUITProv.Text);
+            Session.Add("DNICliente", txt_DNICliente.Text);
              Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
-             Session.Add("MedPag", cbx_MedioPago.SelectedValue);*/
-            Response.Redirect("EditarItemVentas");
+             Session.Add("MedPag", cbx_MedioPago.SelectedValue);
+            Response.Redirect("EditarItemVenta");
         }
 
         protected void txt_DNICliente_TextChanged(object sender, EventArgs e)
