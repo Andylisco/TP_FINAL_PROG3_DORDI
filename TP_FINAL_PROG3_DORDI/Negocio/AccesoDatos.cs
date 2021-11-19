@@ -9,6 +9,7 @@ namespace Negocio
 {
     public class AccesoDatos
     {
+        public SqlTransaction t { get; set; }
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
@@ -21,12 +22,24 @@ namespace Negocio
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TP_Final3; integrated security=true");
             comando = new SqlCommand();
+           
+        }
+
+        public void BeginTransaction()
+        {
+            
         }
 
         public void setearConsulta(string consulta)
         {
+            List<string> ListConsultas = new List<string>();
+            ListConsultas.Add(consulta);
+            setearConsulta(ListConsultas.ToArray());
+        }
+        public void setearConsulta(string[] consulta)
+        {
             comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta;
+            comando.CommandText = string.Join(";",consulta);
         }
 
         public void ejecutarLectura()
@@ -34,14 +47,17 @@ namespace Negocio
             comando.Connection = conexion;
 
             try
-            {
+            {                
                 conexion.Open();
+                
+                t = conexion.BeginTransaction();
+                comando.Transaction = t;
                 lector = comando.ExecuteReader();
+               
             }
             catch (Exception ex)
             {
-
-                throw ex;
+               //ACCION PENDIENTE
             }
         }
 
@@ -51,12 +67,18 @@ namespace Negocio
             try
             {
                 conexion.Open();
+
+                t = conexion.BeginTransaction();
+                comando.Transaction = t;
                 comando.ExecuteNonQuery();
+              
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                if (t != null && t.Connection != null)
+                {
+                    t.Rollback();
+                }
             }
 
         }
@@ -70,6 +92,9 @@ namespace Negocio
         {
             if (lector != null)
                 lector.Close();
+
+            t.Commit();
+
             conexion.Close();
 
         }

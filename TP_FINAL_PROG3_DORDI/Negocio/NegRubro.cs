@@ -17,7 +17,10 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Codigo,Descripcion  FROM Rubros");
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("SELECT Codigo,Descripcion  FROM Rubros");
+
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

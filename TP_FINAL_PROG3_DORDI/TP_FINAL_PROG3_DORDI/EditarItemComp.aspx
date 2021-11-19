@@ -55,6 +55,7 @@
 
                 <div>
                     <asp:Button Text="Agregar" runat="server" OnClick="Agregar_Click" CssClass="btn btn-primary CentrarFormularios" />
+                     <asp:Button Text="Actualizar" runat="server" OnClick="Actualizar_Click" CssClass="btn btn-primary CentrarFormularios" />
                 </div>
             </div>
         </div>

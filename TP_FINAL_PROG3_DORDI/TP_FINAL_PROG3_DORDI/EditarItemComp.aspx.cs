@@ -167,5 +167,43 @@ namespace TP_FINAL_PROG3_DORDI
             cbx_Producto.DataBind();
 
         }
+
+        protected void Actualizar_Click(object sender, EventArgs e)
+        {
+            if (ListaProductos == null)
+            {
+                ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
+               
+            }
+
+
+
+            Producto Prod = new Producto();
+            Neg_Producto NegProd = new Neg_Producto();
+
+            Prod = NegProd.GetSingle(int.Parse(cbx_Producto.SelectedValue));
+            /*Prod.ID = long.Parse(cbx_Producto.SelectedValue);
+            Prod.Codigo = 
+            Prod.Descripcion = cbx_Producto.Text;*/
+            Prod.Cantidad_Compra = int.Parse(txt_Cantidad.Text);
+            Prod.Precio_U = decimal.Parse(txt_Precio.Text);
+
+            Producto ProdSacar = new Producto(); 
+            foreach (Producto Produc in ListaProductos)
+            {
+                if (Produc.ID == Prod.ID)
+                {
+                    ProdSacar = Produc; 
+                }
+            }
+
+            ListaProductos.Remove(ProdSacar);
+
+
+            ListaProductos.Add(Prod);
+            Session.Remove("ListaProductosCompra");
+            Session.Add("ListaProductosCompra", ListaProductos);
+            Response.Redirect("FormCompras?Mod=MA");
+        }
     }
 }

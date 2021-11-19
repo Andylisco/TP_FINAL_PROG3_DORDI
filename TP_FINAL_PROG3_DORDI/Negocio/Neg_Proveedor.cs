@@ -15,7 +15,11 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT RazonSocial, Telefono, Direccion, Mail, Cod_Rubro, PersonaContacto FROM Proveedores WHERE CUIT = @CUIT");
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT RazonSocial, Telefono, Direccion, Mail, Cod_Rubro, PersonaContacto FROM Proveedores WHERE CUIT = @CUIT");
+
+            Datos.setearConsulta(ListaSQLCnslt.ToArray());
+
             Datos.setearParametros("@CUIT", CUIT);
 
             Datos.ejecutarLectura();
@@ -63,16 +67,18 @@ namespace Negocio
             string WHERE = ClausulaWHERE;
             try
             {
-                
-                        datos.setearConsulta("SELECT Pr.CUIT, Pr.RazonSocial, Telefono = ISNULL(Pr.Telefono,'')," + 
+
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("SELECT Pr.CUIT, Pr.RazonSocial, Telefono = ISNULL(Pr.Telefono,'')," +
                                      " Direccion = ISNULL(Pr.Direccion, ''), Mail = ISNULL(Pr.Mail, '')," +
                                      " PersonaContacto = ISNULL(Pr. PersonaContacto, ''), Pr.Cod_Rubro," +
                                      " RubroDesc = ISNULL(R.Descripcion,'') " +
-                                     "FROM Proveedores Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " + 
+                                     "FROM Proveedores Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " +
                                      "WHERE Estado = 1 " + WHERE);
 
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
 
-
+                                
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

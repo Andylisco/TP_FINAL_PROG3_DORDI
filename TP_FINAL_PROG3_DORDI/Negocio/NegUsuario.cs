@@ -14,7 +14,11 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT NivelUsuario, EMail FROM Usuarios WHERE NombreUsuario = @Usuario AND Clave = @Clave AND Estado = 1");
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT NivelUsuario, EMail FROM Usuarios WHERE NombreUsuario = @Usuario AND Clave = @Clave AND Estado = 1");
+
+            Datos.setearConsulta(ListaSQLCnslt.ToArray());
+            
             Datos.setearParametros("@Usuario", User);
             Datos.setearParametros("@Clave", Clave);
 
@@ -36,6 +40,8 @@ namespace Negocio
                                 
 
             }
+
+            Datos.cerrarConexion();
 
             return Usuario;
         }

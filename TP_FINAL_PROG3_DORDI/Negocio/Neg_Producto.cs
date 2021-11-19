@@ -14,12 +14,17 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT P.Codigo, P.Descripcion, P.URL_Imagen, P.Cod_Rubro, P.Cod_Marca, P.Stock, P.Stock_Minimo," +
-                                    "P.PorcentajeGanancia, DescripRubro = R.Descripcion, DescripMarca = M.Descripcion " + 
+
+
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT P.Codigo, P.Descripcion, P.URL_Imagen, P.Cod_Rubro, P.Cod_Marca, P.Stock, P.Stock_Minimo," +
+                                    "P.PorcentajeGanancia, DescripRubro = R.Descripcion, DescripMarca = M.Descripcion " +
                                     "FROM Productos P LEFT JOIN Rubros R ON P.Cod_Rubro = R.Codigo " +
                                     "LEFT JOIN Marcas M ON P.Cod_Marca = M.Codigo " +
                                     "WHERE ID = @ID");
 
+            Datos.setearConsulta(ListaSQLCnslt.ToArray());
+            
             Datos.setearParametros("@ID", ID);
 
             Datos.ejecutarLectura();
@@ -79,14 +84,16 @@ namespace Negocio
             string WHERE = ClausulaWHERE;
             try
             {
-
-                datos.setearConsulta("SELECT Pr.ID, Pr.Codigo, Pr.Descripcion, URL_Imagen = ISNULL(Pr.URL_Imagen,'')," +
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("SELECT Pr.ID, Pr.Codigo, Pr.Descripcion, URL_Imagen = ISNULL(Pr.URL_Imagen,'')," +
                              " Stock, Stock_Minimo, PorcentajeGanancia , Pr.Cod_Rubro," +
                              " RubroDesc = ISNULL(R.Descripcion,''), Pr.Cod_Marca, MarcaDesc = ISNULL(M.Descripcion,'') " +
                              "FROM Productos Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " +
                              "LEFT JOIN Marcas M on Pr.Cod_Marca = M.Codigo " +
                              "WHERE Estado = 1 " + WHERE);
 
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
+                
 
 
                 datos.ejecutarLectura();
@@ -143,7 +150,12 @@ namespace Negocio
 
             AccesoDatos datos = new AccesoDatos();
 
-            datos.setearConsulta("SELECT StockCompras = SUM(Cantidad) FROM Compras WHERE ID_Producto = @ID_Producto AND Estado = 1");
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT StockCompras = SUM(Cantidad) FROM Compras WHERE ID_Producto = @ID_Producto AND Estado = 1");
+
+            datos.setearConsulta(ListaSQLCnslt.ToArray());
+
+            
             datos.setearParametros("@ID_Producto", ID);
 
             datos.ejecutarLectura();
@@ -183,8 +195,14 @@ namespace Negocio
             Producto producto = new Producto();
             AccesoDatos datos = new AccesoDatos();
 
+
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT PrecioMaximo3Meses = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID AND Fecha BETWEEN @FechaAtras AND @FechaActual");
+
+            datos.setearConsulta(ListaSQLCnslt.ToArray());
+
             //BUSCO EL MEJOR PRECiO EN LOS ULTIMOS 3 MESES
-            datos.setearConsulta("SELECT PrecioMaximo3Meses = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID AND Fecha BETWEEN @FechaAtras AND @FechaActual");
+            
             datos.setearParametros("@ID", ID);
             datos.setearParametros("@FechaAtras", DateTime.Now.AddMonths(-3));
             datos.setearParametros("@FechaActual", DateTime.Now);
@@ -206,7 +224,12 @@ namespace Negocio
 
                     //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO
                     AccesoDatos datos2 = new AccesoDatos();
-                    datos2.setearConsulta("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
+
+                    List<string> ListaSQLCnslt2 = new List<string>();
+                    ListaSQLCnslt.Add("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
+
+                    datos2.setearConsulta(ListaSQLCnslt2.ToArray());
+                    
                     datos2.setearParametros("@ID", ID);
 
                     datos2.ejecutarLectura();
@@ -337,7 +360,11 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Productos SET Estado = 0 WHERE ID = " + ID + "");
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("UPDATE Productos SET Estado = 0 WHERE ID = " + ID + "");
+
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
+                
                 datos.ejecutarAccion();
             }
             catch (Exception)

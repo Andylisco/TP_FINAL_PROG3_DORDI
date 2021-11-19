@@ -31,13 +31,7 @@ namespace TP_FINAL_PROG3_DORDI
                 txt_Fecha.Text = DateTime.Today.ToString("dd/MM/yyyy");
 
                 btnActualizar.Visible = false;
-                /* txt_Codigo.MaxLength = 6;
-                 txt_Descripcion.MaxLength = 50;
-                 txt_URLImagen.MaxLength = 250;
-                 txt_StockMinimo.MaxLength = 20;
-                 txt_PorcentajeGanancia.MaxLength = 4;
-                 cbx_Rubro.SelectedIndex = 0;
-                 cbx_Marca.SelectedIndex = 0;*/
+               
                 lbl_TituloActualiza.Visible = false;
 
                 CargarMediosPagos();
@@ -45,14 +39,17 @@ namespace TP_FINAL_PROG3_DORDI
                 CargarMarcas();*/
 
                 var Nro = Request.QueryString["Nro"] != null ? Request.QueryString["Nro"].ToString() : "";
+                
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
 
                 TipoVista = Tipo.ToString();
 
-                if (Tipo == "M" || Tipo == "RM" || Tipo == "V")
+                if (Tipo == "M" || Tipo == "RM" || Tipo == "V" )
                 {
                     if (Nro != "")
                     {
+                        Session.Add("NumeroCompra", Nro);
+
                         _CargarCompra(int.Parse(Nro));
 
 
@@ -63,6 +60,18 @@ namespace TP_FINAL_PROG3_DORDI
                         }
                         else
                         {
+                            if (Tipo == "MA")
+                            {
+                                
+                                    txt_CUITProv.Text = Session["CuitProv"].ToString();
+                                    txt_CUITProv_TextChanged(null, null);
+                                    cbx_TipoFactura.SelectedValue = Session["TipoFac"].ToString();
+                                    cbx_MedioPago.SelectedValue = Session["MedPag"].ToString();
+
+                                    _CargarFromLista();
+
+                            }
+
                             btnActualizar.Visible = true;
                             btnGrabar.Visible = false;
                             lbl_TituloActualiza.Visible = true;
@@ -91,8 +100,31 @@ namespace TP_FINAL_PROG3_DORDI
                             _CargarFromLista();
 
                         }
+
+                        if (Tipo == "MA")
+                        {
+
+                            txt_CUITProv.Text = Session["CuitProv"].ToString();
+                            txt_CUITProv_TextChanged(null, null);
+                            cbx_TipoFactura.SelectedValue = Session["TipoFac"].ToString();
+                            cbx_MedioPago.SelectedValue = Session["MedPag"].ToString();
+
+                            _CargarFromLista();
+
+                            btnActualizar.Visible = true;
+                            btnGrabar.Visible = false;
+                            lbl_TituloActualiza.Visible = true;
+                            lbl_TituloCargar.Visible = false;
+
+                        }
                     }
                 }
+
+                //GUARDO LOS VALORES 
+                Session.Add("CuitProv", txt_CUITProv.Text);
+                Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
+                Session.Add("MedPag", cbx_MedioPago.SelectedValue);
+
             }
         }
 
@@ -214,13 +246,55 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+            //Obtengo El Numero De La compra
+            int Nro = int.Parse(Session["NumeroCompra"].ToString());
+            
+            Neg_Compra Ng_Comp = new Neg_Compra();
+
+            Compra CompActual = Ng_Comp.GetSingle(Nro);
+            
+            Compra Comp = new Compra();
+
+
+            Comp.Nro = CompActual.Nro;
+            Comp.Fecha = CompActual.Fecha;
+            Comp.Proveedor = new Proveedor();
+            Comp.Proveedor.CUIT = txt_CUITProv.Text;
+            Comp.TipoFactura = cbx_TipoFactura.SelectedValue;
+            Comp.Usuario = new Usuario();
+            Comp.Usuario.Nombre = Session["Usuario"].ToString();
+            Comp.Medio_Pago = new MedioPago();
+            Comp.Medio_Pago.Codigo = cbx_MedioPago.SelectedValue;
+
+            ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
+
+            Comp.Productos = new List<Producto>();
+
+            foreach (Producto Prod in ListaProductos)
+            {
+                Comp.Productos.Add(Prod);
+            }
+
+
+
+            try
+            {
+                Ng_Comp.Actualizar(Comp);
+
+                Response.Redirect("Compras.aspx");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         protected void AgregarProd_Click(object sender, EventArgs e)
         {
-            Session.Add("CuitProv", txt_CUITProv.Text);
+           /* Session.Add("CuitProv", txt_CUITProv.Text);
             Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
-            Session.Add("MedPag", cbx_MedioPago.SelectedValue);
+            Session.Add("MedPag", cbx_MedioPago.SelectedValue);*/
             Response.Redirect("EditarItemComp");
         }
 

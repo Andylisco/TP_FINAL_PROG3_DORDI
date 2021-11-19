@@ -14,7 +14,8 @@ namespace Negocio
         {
             AccesoDatos Datos = new AccesoDatos();
 
-            Datos.setearConsulta("SELECT C.Renglon, C.CUIT_Prov, Pv.RazonSocial, C.Fecha, C.Tipo_Factura, C.ID_Producto, " +
+            List<string> ListaSQLCnslt = new List<string>();
+            ListaSQLCnslt.Add("SELECT C.Renglon, C.CUIT_Prov, Pv.RazonSocial, C.Fecha, C.Tipo_Factura, C.ID_Producto, " +
                                     "C.ID_MedioPago, Descrip_MedioPago = M.Descripcion, C.NombreUsuario, " +
                                     "C.PrecioU, C.Cantidad, Cod_Producto = P.Codigo, Descrip_Producto = p.Descripcion " +
                                     "FROM Compras C LEFT JOIN MediosPagos M ON C.ID_MedioPago = M.Codigo " +
@@ -22,6 +23,9 @@ namespace Negocio
                                     "LEFT JOIN Proveedores Pv ON C.CUIT_Prov = Pv.CUIT " +
                                     "WHERE C.Nro_Factura = @Nro_Factura AND C.Estado = 1 " +
                                     "ORDER BY Renglon DESC");
+
+            Datos.setearConsulta(ListaSQLCnslt.ToArray());
+
 
             Datos.setearParametros("@Nro_Factura", Nro);
 
@@ -37,7 +41,7 @@ namespace Negocio
                 if (!(Datos.Lector["Renglon"] is DBNull))
                 {
                     Renglon = (int)Datos.Lector["Renglon"];
-                    
+
                     if (Renglon == 1)
                     {
                         compra.Nro = Nro;
@@ -50,7 +54,7 @@ namespace Negocio
                             compra.Proveedor.RazonSocial = (string)Datos.Lector["RazonSocial"];
 
                         if (!(Datos.Lector["Fecha"] is DBNull))
-                           compra.Fecha = (DateTime)Datos.Lector["Fecha"];
+                            compra.Fecha = (DateTime)Datos.Lector["Fecha"];
 
                         if (!(Datos.Lector["Tipo_Factura"] is DBNull))
                             compra.TipoFactura = (string)Datos.Lector["Tipo_Factura"];
@@ -70,7 +74,7 @@ namespace Negocio
                             compra.Medio_Pago.Descripcion = (string)Datos.Lector["Descrip_MedioPago"];
                     }
 
-                    
+
                     //AÑADO CADA PRODUCTO A LA LISTA
                     Producto Produ = new Producto();
 
@@ -78,22 +82,22 @@ namespace Negocio
                         Produ.ID = (long)Datos.Lector["ID_Producto"];
 
                     if (!(Datos.Lector["Cod_Producto"] is DBNull))
-                            Produ.Codigo = (string)Datos.Lector["Cod_Producto"];
+                        Produ.Codigo = (string)Datos.Lector["Cod_Producto"];
 
-                       
-                        if (!(Datos.Lector["Descrip_Producto"] is DBNull))
-                            Produ.Descripcion = (string)Datos.Lector["Descrip_Producto"];
 
-                        if (!(Datos.Lector["PrecioU"] is DBNull))
-                            Produ.Precio_U = (decimal)Datos.Lector["PrecioU"];
+                    if (!(Datos.Lector["Descrip_Producto"] is DBNull))
+                        Produ.Descripcion = (string)Datos.Lector["Descrip_Producto"];
 
-                                                
-                        if (!(Datos.Lector["Cantidad"] is DBNull))
-                            Produ.Cantidad_Compra = (int)Datos.Lector["Cantidad"];
+                    if (!(Datos.Lector["PrecioU"] is DBNull))
+                        Produ.Precio_U = (decimal)Datos.Lector["PrecioU"];
+
+
+                    if (!(Datos.Lector["Cantidad"] is DBNull))
+                        Produ.Cantidad_Compra = (int)Datos.Lector["Cantidad"];
 
                     compra.Productos.Add(Produ);
                 }
-               
+
 
 
 
@@ -115,13 +119,16 @@ namespace Negocio
             try
             {
 
-                datos.setearConsulta("SELECT DISTINCT C.Nro_Factura, C.CUIT_Prov, Pv.RazonSocial, C.Fecha, C.Tipo_Factura, " + 
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("SELECT DISTINCT C.Nro_Factura, C.CUIT_Prov, Pv.RazonSocial, C.Fecha, C.Tipo_Factura, " +
                                     "TotalImporte = (SELECT SUM(PrecioU * Cantidad) FROM Compras WHERE Nro_Factura = C.Nro_Factura), " +
-                                    "C.ID_MedioPago, Descrip_MedioPago = M.Descripcion, C.NombreUsuario " +                                    
+                                    "C.ID_MedioPago, Descrip_MedioPago = M.Descripcion, C.NombreUsuario " +
                                     "FROM Compras C LEFT JOIN MediosPagos M ON C.ID_MedioPago = M.Codigo " +
                                     "LEFT JOIN Productos P ON C.ID_PRoducto = P.ID " +
                                     "LEFT JOIN Proveedores Pv ON C.CUIT_Prov = Pv.CUIT " +
-                                    "WHERE  C.Estado = 1 AND C.Renglon = 1 " + WHERE );
+                                    "WHERE  C.Estado = 1 AND C.Renglon = 1 " + WHERE);
+
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
 
 
 
@@ -130,13 +137,13 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Compra aux = new Compra();
-                    
+
 
                     aux.Nro = (int)datos.Lector["Nro_Factura"];
 
                     aux.Proveedor = new Proveedor();
                     aux.Proveedor.CUIT = (string)datos.Lector["CUIT_Prov"];
-                    aux.Proveedor.RazonSocial= (string)datos.Lector["RazonSocial"];
+                    aux.Proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
 
                     aux.TipoFactura = (string)datos.Lector["Tipo_Factura"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
@@ -146,7 +153,7 @@ namespace Negocio
                     aux.Medio_Pago.Codigo = (string)datos.Lector["ID_MedioPago"];
                     aux.Medio_Pago.Descripcion = (string)datos.Lector["Descrip_MedioPago"];
 
-                 
+
 
 
                     //LO AGREGO A LA LISTA
@@ -246,7 +253,7 @@ namespace Negocio
                 NuevoNumero = ((int)datos.Lector["Nuevo_Nro_Factura"] + 1);
             }
 
-                datos.cerrarConexion();
+            datos.cerrarConexion();
 
             return NuevoNumero;
         }
@@ -260,6 +267,7 @@ namespace Negocio
                 Renglon += 1;
 
                 AccesoDatos datos = new AccesoDatos();
+
 
                 datos.setearConsulta("INSERT INTO Compras(Nro_Factura, Renglon, CUIT_Prov, Fecha, Tipo_Factura,NombreUsuario," +
                                                             "ID_MedioPago, ID_Producto, Cantidad, PrecioU, Estado)" +
@@ -285,32 +293,49 @@ namespace Negocio
 
             }
         }
-        
-            
-        /*
-        public void Actualizar(Compra nuevo)
+
+
+
+        public void Actualizar(Compra Comp)
         {
+            int Renglon = 0;
+
+            List<string> ListaConsultas = new List<string>();
+
+            ListaConsultas.Add("DELETE FROM Compras WHERE Nro_Factura = '" + Comp.Nro + "'");
+
             AccesoDatos datos = new AccesoDatos();
 
+            foreach (Producto Prod in Comp.Productos)
+            {
+                Renglon += 1;
 
-            datos.setearConsulta("UPDATE Productos SET Codigo = @Codigo, Descripcion = @Descripcion, URL_Imagen = @URL_Imagen, " +
-                 "@Cod_Rubro = @Cod_Rubro, Cod_Marca = @Cod_Marca, Stock_Minimo = @Stock_Minimo, PorcentajeGanancia = @PorcentajeGanancia " +
-                 "WHERE ID = @ID");
+            ListaConsultas.Add("INSERT INTO Compras(Nro_Factura, Renglon, CUIT_Prov, Fecha, Tipo_Factura,NombreUsuario," +
+                                                    "ID_MedioPago, ID_Producto, Cantidad, PrecioU, Estado)" +
+                               "VALUES(@Nro_Factura" + Renglon.ToString() + ", " + Renglon + ", @CUIT_Prov" + Renglon.ToString() + ", @Fecha" + Renglon.ToString() + ", @Tipo_Factura" + Renglon.ToString() + ", @NombreUsuario" + Renglon.ToString() + "," +
+                                                  "@ID_MedioPago" + Renglon.ToString() + ", @ID_Producto" + Renglon.ToString() + ", @Cantidad" + Renglon.ToString() + ", @PrecioU" + Renglon.ToString() +", " + 1 + ")");
+           
+            datos.setearConsulta(ListaConsultas.ToArray());
+                datos.setearParametros("@Nro_Factura" + Renglon.ToString(), Comp.Nro);                
+                datos.setearParametros("@CUIT_Prov" + Renglon.ToString(), Comp.Proveedor.CUIT);
+                datos.setearParametros("@Fecha" + Renglon.ToString(), Comp.Fecha);
+                datos.setearParametros("@Tipo_Factura" + Renglon.ToString(), Comp.TipoFactura);
+                datos.setearParametros("@NombreUsuario" + Renglon.ToString(), Comp.Usuario.Nombre);
+                datos.setearParametros("@ID_MedioPago" + Renglon.ToString(), Comp.Medio_Pago.Codigo);
+                datos.setearParametros("@ID_Producto" + Renglon.ToString(), Prod.ID);
+                datos.setearParametros("@Cantidad" + Renglon.ToString(), Prod.Cantidad_Compra);
+                datos.setearParametros("@PrecioU" + Renglon.ToString(), Prod.Precio_U);
+                
+                
 
-            datos.setearParametros("@ID", nuevo.ID);
-            datos.setearParametros("@Codigo", nuevo.Codigo);
-            datos.setearParametros("@Descripcion", nuevo.Descripcion);
-            datos.setearParametros("@URL_Imagen", nuevo.URLimagen);
-            datos.setearParametros("@Cod_Rubro", nuevo.Rubro.Codigo);
-            datos.setearParametros("@Cod_Marca", nuevo.Marca.Codigo);
-            datos.setearParametros("@Stock_Minimo", nuevo.StockMinimo);
-            datos.setearParametros("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
+            }
+            
 
             datos.ejecutarAccion();
 
             datos.cerrarConexion();
 
-        }*/
+        }
 
         public void DarBaja(int Nro)
         {

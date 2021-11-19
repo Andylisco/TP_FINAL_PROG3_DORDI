@@ -37,7 +37,7 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btn_Compras_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Clientes");
+            Response.Redirect("Compras");
         }
     }
 }
