@@ -10,7 +10,7 @@ namespace Dominio
     {
         public int Nro { get; set; }
         public DateTime Fecha { get; set; }
-        public Cliente Proveedor { get; set; }
+        public Cliente Cliente { get; set; }
         public string TipoFactura { get; set; }
         public List<Producto> Productos { get; set; }
         public decimal TotalImporte { get; set; }

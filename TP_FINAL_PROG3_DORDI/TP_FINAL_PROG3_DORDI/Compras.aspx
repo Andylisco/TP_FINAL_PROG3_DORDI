@@ -14,7 +14,10 @@
     <hr />
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+         <%if (NivelUsuario == 0)
+             { %>
          <a href="/FormCompras" class="btn btn-primary">NUEVA COMPRA</a> 
+        <%} %>
          <button type="button" class="btn btn-secondary">2</button>
 
         <!--<div class="btn-group" role="group">

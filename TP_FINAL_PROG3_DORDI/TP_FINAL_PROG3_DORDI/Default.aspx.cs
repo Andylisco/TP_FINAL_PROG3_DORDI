@@ -9,13 +9,14 @@ namespace TP_FINAL_PROG3_DORDI
 {
     public partial class _Default : Page
     {
+        public int NivelUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            var NivelU = (int)Session["NivelUsuario"];
-            if (NivelU != 0)
+            NivelUsuario = (int)Session["NivelUsuario"];
+            if (NivelUsuario != 0)
             {
-                btn_GestionarUsuarios.Visible = false;
-                DropDownVarios.Visible = false;
+                btn_GestionarUsuarios.Visible = false;                
+                btn_Compras.Visible = false;
             }
         }
 
@@ -38,6 +39,11 @@ namespace TP_FINAL_PROG3_DORDI
         protected void btn_Compras_Click(object sender, EventArgs e)
         {
             Response.Redirect("Compras");
+        }
+
+        protected void btn_Ventas_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ventas");
         }
     }
 }

@@ -73,6 +73,23 @@ PrecioU decimal(10,2) not null check(PrecioU > 0),
 Cantidad int not null check(Cantidad > 0),
 Estado bit not null default(1)
 ) 
+go
 
+
+Create table Ventas(
+ID int primary key identity(1,1),
+Nro_Factura int not null,
+Renglon int not null,
+DNI_Cliente varchar(8) not null foreign key references Clientes(DNI),
+Fecha date not null,
+Tipo_Factura char(1) not null,
+ID_Producto bigint not null Foreign key references Productos(ID),
+ID_MedioPago varchar(3) not null Foreign key references MediosPagos(Codigo),
+NombreUsuario nvarchar(50) not null Foreign key references Usuarios(NombreUsuario),
+PrecioU decimal(10,2) not null check(PrecioU > 0),
+Cantidad int not null check(Cantidad > 0),
+Estado bit not null default(1)
+) 
+go
 
 

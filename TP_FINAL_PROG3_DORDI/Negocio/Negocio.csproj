@@ -50,6 +50,7 @@
     <Compile Include="Neg_MedioPago.cs" />
     <Compile Include="Neg_Producto.cs" />
     <Compile Include="Neg_Proveedor.cs" />
+    <Compile Include="Neg_Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

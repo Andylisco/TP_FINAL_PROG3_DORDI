@@ -226,7 +226,7 @@ namespace Negocio
                     AccesoDatos datos2 = new AccesoDatos();
 
                     List<string> ListaSQLCnslt2 = new List<string>();
-                    ListaSQLCnslt.Add("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
+                    ListaSQLCnslt2.Add("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
 
                     datos2.setearConsulta(ListaSQLCnslt2.ToArray());
                     
