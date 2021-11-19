@@ -13,6 +13,7 @@ namespace TP_FINAL_PROG3_DORDI
     {
         public List<Producto> ListaProductos { get; set; }
         public int NivelUsuario { get; set; }
+        public string TipoAcccion { get; set; }
         public Compra CompActual{ get; set; }
 
         public string TipoVista { get; set; }
@@ -36,6 +37,8 @@ namespace TP_FINAL_PROG3_DORDI
 
                 cbxActualizar_SelectedIndexChanged(null,null);
 
+                lbl_TituloModificar.Visible = false;
+
 
                 var ID = Request.QueryString["ID"] != null ? Request.QueryString["ID"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
@@ -48,6 +51,10 @@ namespace TP_FINAL_PROG3_DORDI
                     {
                         _CargarItem(int.Parse(ID));
 
+                        TipoAcccion = Tipo;
+
+                        lbl_TituloAgregar.Visible = false;
+                        lbl_TituloModificar.Visible = true;
                     }
                 }
                 else

@@ -24,7 +24,7 @@
                         <div class="padearControles Separador">
                             <asp:Label ID="lbl_Rubro" runat="server" for="txt_Rubro" CssClass="form-label" Font-Bold="true" Text="Rubro" />
                             <asp:DropDownList ID="cbx_Rubro" runat="server" ClientIDMode="Static" CssClass="btn btn-primary dropdown-toggle ColorB_N_Dropdowns"
-                                AutoPostBack="true" onselectedindexchanged="cbxActualizar_SelectedIndexChanged">
+                                AutoPostBack="true" OnSelectedIndexChanged="cbxActualizar_SelectedIndexChanged">
                             </asp:DropDownList>
                         </div>
 
@@ -54,8 +54,13 @@
                 </div>
 
                 <div>
-                    <asp:Button Text="Agregar" runat="server" OnClick="Agregar_Click" CssClass="btn btn-primary CentrarFormularios" />
-                     <asp:Button Text="Actualizar" runat="server" OnClick="Actualizar_Click" CssClass="btn btn-primary CentrarFormularios" />
+                    <%if (TipoAcccion != "M")
+                      {%>
+                            <asp:Button Text="Agregar" runat="server" OnClick="Agregar_Click" CssClass="btn btn-primary CentrarFormularios" />
+                    <%}
+                      else{%>
+                            <asp:Button Text="Actualizar" runat="server" OnClick="Actualizar_Click" CssClass="btn btn-primary CentrarFormularios" />
+                    <%}%>
                 </div>
             </div>
         </div>

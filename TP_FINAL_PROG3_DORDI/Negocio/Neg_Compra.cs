@@ -315,7 +315,7 @@ namespace Negocio
                                "VALUES(@Nro_Factura" + Renglon.ToString() + ", " + Renglon + ", @CUIT_Prov" + Renglon.ToString() + ", @Fecha" + Renglon.ToString() + ", @Tipo_Factura" + Renglon.ToString() + ", @NombreUsuario" + Renglon.ToString() + "," +
                                                   "@ID_MedioPago" + Renglon.ToString() + ", @ID_Producto" + Renglon.ToString() + ", @Cantidad" + Renglon.ToString() + ", @PrecioU" + Renglon.ToString() +", " + 1 + ")");
            
-            datos.setearConsulta(ListaConsultas.ToArray());
+                datos.setearConsulta(ListaConsultas.ToArray());
                 datos.setearParametros("@Nro_Factura" + Renglon.ToString(), Comp.Nro);                
                 datos.setearParametros("@CUIT_Prov" + Renglon.ToString(), Comp.Proveedor.CUIT);
                 datos.setearParametros("@Fecha" + Renglon.ToString(), Comp.Fecha);
