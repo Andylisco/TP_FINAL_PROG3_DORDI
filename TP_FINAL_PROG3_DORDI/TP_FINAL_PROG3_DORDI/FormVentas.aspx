@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FormCompras.aspx.cs" Inherits="TP_FINAL_PROG3_DORDI.FormCompras" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FormVentas.aspx.cs" Inherits="TP_FINAL_PROG3_DORDI.FormVentas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    
     <hr />
     <hr />
 
@@ -10,8 +11,8 @@
 
         <div class="col">
             <div class="CentrarTitulos padearControles">
-                <asp:Label ID="lbl_TituloActualiza" Text="ACTUALIZA COMPRA" runat="server" CssClass="h3" />
-                <asp:Label ID="lbl_TituloCargar" Text="CARGAR COMPRA" runat="server" CssClass="h3" />
+                <asp:Label ID="lbl_TituloActualiza" Text="ACTUALIZA VENTA" runat="server" CssClass="h3" />
+                <asp:Label ID="lbl_TituloCargar" Text="CARGAR VENTA" runat="server" CssClass="h3" />
                 <!--<h3>ACTUALIZA PRODUCTO</h3>-->
             </div>
 
@@ -36,12 +37,12 @@
 
                                 <div class="AlinearCbx w-100">
                                     <div class="Separador w-100">
-                                        <asp:Label ID="lbl_CUITProv" runat="server" for="txt_CUITProv" CssClass="form-label" Font-Bold="true" Text="CUIT Prov."></asp:Label>
-                                        <asp:TextBox ID="txt_CUITProv" runat="server" OnTextChanged="txt_CUITProv_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                        <asp:Label ID="lbl_DNICliente" runat="server" for="txt_DNICliente" CssClass="form-label" Font-Bold="true" Text="DNI Cliente"></asp:Label>
+                                        <asp:TextBox ID="txt_DNICliente" runat="server" OnTextChanged="txt_DNICliente_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
                                     </div>
                                     <div class="Separador w-100">
-                                        <asp:Label ID="lbl_DescpProv" runat="server" for="txt_DescpProv" CssClass="form-label" Font-Bold="true" Text="Descp. Prov."></asp:Label>
-                                        <asp:TextBox ID="txt_DescpProv" runat="server" ClientIDMode="Static" CssClass="form-control " ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lbl_ApellidoNombre" runat="server" for="txt_ApellidoNombre" CssClass="form-label" Font-Bold="true" Text="Apellido y Nombre"></asp:Label>
+                                        <asp:TextBox ID="txt_ApellidoNombre" runat="server" ClientIDMode="Static" CssClass="form-control " ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -68,9 +69,9 @@
 
                             <%if (TipoVista != "V")
                                 {%>
-                            <asp:Button Text="GRABAR COMPRA" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="GRABAR VENTA" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
 
-                            <asp:Button Text="ACTUALIZA COMPRA" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="ACTUALIZA VENTA" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
                             <%} %>
                         </div>
 
@@ -108,8 +109,8 @@
                                             {
                                                 if (TipoVista != "V")
                                                 {%>
-                                        <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
-                                        <td><a href="EditarItemComp.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
+                                        <td><a href="EditarItemVentas.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
+                                        <td><a href="EditarItemVentas.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
                                         <%}
                                             } %>
                                     </tr>
@@ -133,4 +134,6 @@
 
             <div class="col-3"></div>
         </div>
+
+
 </asp:Content>

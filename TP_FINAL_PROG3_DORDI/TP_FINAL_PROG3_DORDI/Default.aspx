@@ -55,14 +55,6 @@
                         </ul>
                     </div>
 
-
-
-                   <!-- <a class="btn btn-primary " id="DropDownVarios" data-bs-toggle="dropdown" data-bs-offset="0,-100" aria-expanded="false" role="button">VARIOS</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">RUBROS</a></li>
-                        <li><a class="dropdown-item" href="#">MARCAS</a></li>
-                        <li><a class="dropdown-item" href="#">MEDIOS DE PAGO</a></li>
-                    </ul>-->
                     <%} %>
                 </div>
             </div>

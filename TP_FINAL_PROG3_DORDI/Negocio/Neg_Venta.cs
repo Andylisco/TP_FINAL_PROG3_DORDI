@@ -10,18 +10,19 @@ namespace Negocio
     public class Neg_Venta
     {
 
-        /*public Compra GetSingle(int Nro)
+        public Venta GetSingle(int Nro)
         {
             AccesoDatos Datos = new AccesoDatos();
 
             List<string> ListaSQLCnslt = new List<string>();
-            ListaSQLCnslt.Add("SELECT C.Renglon, C.CUIT_Prov, Pv.RazonSocial, C.Fecha, C.Tipo_Factura, C.ID_Producto, " +
-                                    "C.ID_MedioPago, Descrip_MedioPago = M.Descripcion, C.NombreUsuario, " +
-                                    "C.PrecioU, C.Cantidad, Cod_Producto = P.Codigo, Descrip_Producto = p.Descripcion " +
-                                    "FROM Compras C LEFT JOIN MediosPagos M ON C.ID_MedioPago = M.Codigo " +
-                                    "LEFT JOIN Productos P ON C.ID_PRoducto = P.ID " +
-                                    "LEFT JOIN Proveedores Pv ON C.CUIT_Prov = Pv.CUIT " +
-                                    "WHERE C.Nro_Factura = @Nro_Factura AND C.Estado = 1 " +
+            ListaSQLCnslt.Add("SELECT V.Nro_Factura, V.DNI_Cliente, V.Renglon, Cl.Apellido, Cl.Nombre, V.Fecha, V.Tipo_Factura, V.ID_Producto, " +
+                                    "TotalImporte = (SELECT SUM(PrecioU * Cantidad) FROM Ventas WHERE Nro_Factura = V.Nro_Factura), " +
+                                    "V.ID_MedioPago, Descrip_MedioPago = M.Descripcion, V.NombreUsuario, " +
+                                    "V.PrecioU, V.Cantidad, Cod_Producto = P.Codigo, Descrip_Producto = P.Descripcion " +
+                                    "FROM Ventas V LEFT JOIN MediosPagos M ON V.ID_MedioPago = M.Codigo " +
+                                    "LEFT JOIN Productos P ON V.ID_PRoducto = P.ID " +
+                                    "LEFT JOIN Clientes Cl ON V.DNI_Cliente = Cl.DNI " +
+                                    "WHERE V.Nro_Factura = @Nro_Factura AND V.Estado = 1 " +
                                     "ORDER BY Renglon DESC");
 
             Datos.setearConsulta(ListaSQLCnslt.ToArray());
@@ -31,8 +32,8 @@ namespace Negocio
 
             Datos.ejecutarLectura();
 
-            Compra compra = new Compra();
-            compra.Productos = new List<Producto>();
+            Venta venta = new Venta();
+            venta.Productos = new List<Producto>();
 
             int Renglon;
 
@@ -44,34 +45,37 @@ namespace Negocio
 
                     if (Renglon == 1)
                     {
-                        compra.Nro = Nro;
-                        //PROVEEDOR
-                        compra.Proveedor = new Proveedor();
-                        if (!(Datos.Lector["CUIT_Prov"] is DBNull))
-                            compra.Proveedor.CUIT = (string)Datos.Lector["CUIT_Prov"];
+                        venta.Nro = Nro;
+                        //CLIENTE
+                        venta.Cliente = new Cliente();
+                        if (!(Datos.Lector["DNI_Cliente"] is DBNull))
+                            venta.Cliente.DNI = (string)Datos.Lector["DNI_Cliente"];
 
-                        if (!(Datos.Lector["RazonSocial"] is DBNull))
-                            compra.Proveedor.RazonSocial = (string)Datos.Lector["RazonSocial"];
+                        if (!(Datos.Lector["Apellido"] is DBNull))
+                            venta.Cliente.Apellido = (string)Datos.Lector["Apellido"];
+
+                        if (!(Datos.Lector["Nombre"] is DBNull))
+                            venta.Cliente.Nombre = (string)Datos.Lector["Nombre"];
 
                         if (!(Datos.Lector["Fecha"] is DBNull))
-                            compra.Fecha = (DateTime)Datos.Lector["Fecha"];
+                            venta.Fecha = (DateTime)Datos.Lector["Fecha"];
 
                         if (!(Datos.Lector["Tipo_Factura"] is DBNull))
-                            compra.TipoFactura = (string)Datos.Lector["Tipo_Factura"];
+                            venta.TipoFactura = (string)Datos.Lector["Tipo_Factura"];
 
 
                         // USUARIO
-                        compra.Usuario = new Usuario();
+                        venta.Usuario = new Usuario();
                         if (!(Datos.Lector["NombreUsuario"] is DBNull))
-                            compra.Usuario.Nombre = (string)Datos.Lector["NombreUsuario"];
+                            venta.Usuario.Nombre = (string)Datos.Lector["NombreUsuario"];
 
                         //MEDIO PAGO
-                        compra.Medio_Pago = new MedioPago();
+                        venta.MedioPago = new MedioPago();
                         if (!(Datos.Lector["ID_MedioPago"] is DBNull))
-                            compra.Medio_Pago.Codigo = (string)Datos.Lector["ID_MedioPago"];
+                            venta.MedioPago.Codigo = (string)Datos.Lector["ID_MedioPago"];
 
                         if (!(Datos.Lector["Descrip_MedioPago"] is DBNull))
-                            compra.Medio_Pago.Descripcion = (string)Datos.Lector["Descrip_MedioPago"];
+                            venta.MedioPago.Descripcion = (string)Datos.Lector["Descrip_MedioPago"];
                     }
 
 
@@ -95,19 +99,16 @@ namespace Negocio
                     if (!(Datos.Lector["Cantidad"] is DBNull))
                         Produ.Cantidad_Compra = (int)Datos.Lector["Cantidad"];
 
-                    compra.Productos.Add(Produ);
+                    venta.Productos.Add(Produ);
                 }
-
-
-
 
 
             }
 
 
 
-            return compra;
-        }*/
+            return venta;
+        }
 
         public List<Venta> GetAll(string ClausulaWHERE = "")
         {
@@ -260,29 +261,29 @@ namespace Negocio
             return NuevoNumero;
         }
 
-      /*  public void agregar(Compra nueva_Comp)
+       public void agregar(Venta nueva_Venta)
         {
             int Renglon = 0;
 
-            foreach (Producto Prod in nueva_Comp.Productos)
+            foreach (Producto Prod in nueva_Venta.Productos)
             {
                 Renglon += 1;
 
                 AccesoDatos datos = new AccesoDatos();
 
 
-                datos.setearConsulta("INSERT INTO Compras(Nro_Factura, Renglon, CUIT_Prov, Fecha, Tipo_Factura,NombreUsuario," +
+                datos.setearConsulta("INSERT INTO Ventas(Nro_Factura, Renglon, DNI_Cliente, Fecha, Tipo_Factura,NombreUsuario," +
                                                             "ID_MedioPago, ID_Producto, Cantidad, PrecioU, Estado)" +
-                                                    "VALUES(@Nro_Factura, @Renglon, @CUIT_Prov, @Fecha, @Tipo_Factura, @NombreUsuario," +
+                                                    "VALUES(@Nro_Factura, @Renglon, @DNI_Cliente, @Fecha, @Tipo_Factura, @NombreUsuario," +
                                                             "@ID_MedioPago, @ID_Producto, @Cantidad, @PrecioU, @Estado)");
 
-                datos.setearParametros("@Nro_Factura", nueva_Comp.Nro);
+                datos.setearParametros("@Nro_Factura", nueva_Venta.Nro);
                 datos.setearParametros("@Renglon", Renglon);
-                datos.setearParametros("@CUIT_Prov", nueva_Comp.Proveedor.CUIT);
-                datos.setearParametros("@Fecha", nueva_Comp.Fecha);
-                datos.setearParametros("@Tipo_Factura", nueva_Comp.TipoFactura);
-                datos.setearParametros("@NombreUsuario", nueva_Comp.Usuario.Nombre);
-                datos.setearParametros("@ID_MedioPago", nueva_Comp.Medio_Pago.Codigo);
+                datos.setearParametros("@DNI_Cliente", nueva_Venta.Cliente.DNI);
+                datos.setearParametros("@Fecha", nueva_Venta.Fecha);
+                datos.setearParametros("@Tipo_Factura", nueva_Venta.TipoFactura);
+                datos.setearParametros("@NombreUsuario", nueva_Venta.Usuario.Nombre);
+                datos.setearParametros("@ID_MedioPago", nueva_Venta.MedioPago.Codigo);
                 datos.setearParametros("@ID_Producto", Prod.ID);
                 datos.setearParametros("@Cantidad", Prod.Cantidad_Compra);
                 datos.setearParametros("@PrecioU", Prod.Precio_U);
@@ -298,32 +299,32 @@ namespace Negocio
 
 
 
-        public void Actualizar(Compra Comp)
+        public void Actualizar(Venta vent)
         {
             int Renglon = 0;
 
             List<string> ListaConsultas = new List<string>();
 
-            ListaConsultas.Add("DELETE FROM Compras WHERE Nro_Factura = '" + Comp.Nro + "'");
+            ListaConsultas.Add("DELETE FROM Ventas WHERE Nro_Factura = '" + vent.Nro + "'");
 
             AccesoDatos datos = new AccesoDatos();
 
-            foreach (Producto Prod in Comp.Productos)
+            foreach (Producto Prod in vent.Productos)
             {
                 Renglon += 1;
 
-                ListaConsultas.Add("INSERT INTO Compras(Nro_Factura, Renglon, CUIT_Prov, Fecha, Tipo_Factura,NombreUsuario," +
+                ListaConsultas.Add("INSERT INTO Ventas(Nro_Factura, Renglon, DNI_Cliente, Fecha, Tipo_Factura,NombreUsuario," +
                                                         "ID_MedioPago, ID_Producto, Cantidad, PrecioU, Estado)" +
-                                   "VALUES(@Nro_Factura" + Renglon.ToString() + ", " + Renglon + ", @CUIT_Prov" + Renglon.ToString() + ", @Fecha" + Renglon.ToString() + ", @Tipo_Factura" + Renglon.ToString() + ", @NombreUsuario" + Renglon.ToString() + "," +
+                                   "VALUES(@Nro_Factura" + Renglon.ToString() + ", " + Renglon + ", @DNI_Cliente" + Renglon.ToString() + ", @Fecha" + Renglon.ToString() + ", @Tipo_Factura" + Renglon.ToString() + ", @NombreUsuario" + Renglon.ToString() + "," +
                                                       "@ID_MedioPago" + Renglon.ToString() + ", @ID_Producto" + Renglon.ToString() + ", @Cantidad" + Renglon.ToString() + ", @PrecioU" + Renglon.ToString() + ", " + 1 + ")");
 
                 datos.setearConsulta(ListaConsultas.ToArray());
-                datos.setearParametros("@Nro_Factura" + Renglon.ToString(), Comp.Nro);
-                datos.setearParametros("@CUIT_Prov" + Renglon.ToString(), Comp.Proveedor.CUIT);
-                datos.setearParametros("@Fecha" + Renglon.ToString(), Comp.Fecha);
-                datos.setearParametros("@Tipo_Factura" + Renglon.ToString(), Comp.TipoFactura);
-                datos.setearParametros("@NombreUsuario" + Renglon.ToString(), Comp.Usuario.Nombre);
-                datos.setearParametros("@ID_MedioPago" + Renglon.ToString(), Comp.Medio_Pago.Codigo);
+                datos.setearParametros("@Nro_Factura" + Renglon.ToString(), vent.Nro);
+                datos.setearParametros("@DNI_Cliente" + Renglon.ToString(), vent.Cliente.DNI);
+                datos.setearParametros("@Fecha" + Renglon.ToString(), vent.Fecha);
+                datos.setearParametros("@Tipo_Factura" + Renglon.ToString(), vent.TipoFactura);
+                datos.setearParametros("@NombreUsuario" + Renglon.ToString(), vent.Usuario.Nombre);
+                datos.setearParametros("@ID_MedioPago" + Renglon.ToString(), vent.MedioPago.Codigo);
                 datos.setearParametros("@ID_Producto" + Renglon.ToString(), Prod.ID);
                 datos.setearParametros("@Cantidad" + Renglon.ToString(), Prod.Cantidad_Compra);
                 datos.setearParametros("@PrecioU" + Renglon.ToString(), Prod.Precio_U);
@@ -337,7 +338,7 @@ namespace Negocio
 
             datos.cerrarConexion();
 
-        }*/
+        }
 
         public void DarBaja(int Nro)
         {

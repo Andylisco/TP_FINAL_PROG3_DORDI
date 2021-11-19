@@ -14,7 +14,7 @@
     <hr />
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-         <a href="/FormVenta" class="btn btn-primary">NUEVA VENTA</a> 
+         <a href="/FormVentas" class="btn btn-primary">NUEVA VENTA</a> 
          <button type="button" class="btn btn-secondary">2</button>
 
         <!--<div class="btn-group" role="group">
@@ -53,7 +53,7 @@
           <td> <%: Compra.TotalImporte %></td>
           
 
-          <td> <a href="FormVentas.aspx?Nro=<%: Compra.Nro %>&Mod=V" class="btn btn-primary">VER COMPRA</a> </td>
+          <td> <a href="FormVentas.aspx?Nro=<%: Compra.Nro %>&Mod=V" class="btn btn-primary">VER Venta</a> </td>
               <%if (NivelUsuario == 0) { %>
             <td> <a href="FormVentas.aspx?Nro=<%: Compra.Nro %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
             <td> <a href="FormVentas.aspx?Nro=<%: Compra.Nro %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>

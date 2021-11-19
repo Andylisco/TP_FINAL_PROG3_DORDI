@@ -119,6 +119,7 @@
     <Content Include="FormCliente.aspx" />
     <Content Include="FormCompras.aspx" />
     <Content Include="FormProducto.aspx" />
+    <Content Include="FormVentas.aspx" />
     <Content Include="Imagenes\Comercio.jpg" />
     <Content Include="Imagenes\Depocito.png" />
     <Content Include="Productos.aspx" />
@@ -294,6 +295,13 @@
     </Compile>
     <Compile Include="FormProducto.aspx.designer.cs">
       <DependentUpon>FormProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormVentas.aspx.cs">
+      <DependentUpon>FormVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormVentas.aspx.designer.cs">
+      <DependentUpon>FormVentas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>
