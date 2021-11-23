@@ -14,8 +14,8 @@
         <%if (NivelUsuario == 0)
             { %>
         <a href="/FormProducto" class="btn btn-primary">AGREGAR PRODUCTO</a>
+        <a href="/Listado_MovVarios" class="btn btn-primary">MOVIMIENTOS VARIOS</a>        
         <% }   %>
-        <button type="button" class="btn btn-secondary">2</button>
 
         <!--<div class="btn-group" role="group">
              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

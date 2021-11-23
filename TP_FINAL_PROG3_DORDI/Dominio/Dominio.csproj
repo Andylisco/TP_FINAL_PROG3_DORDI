@@ -45,6 +45,7 @@
     <Compile Include="Compra.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="MedioPago.cs" />
+    <Compile Include="MovVario.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Proveedor.cs" />

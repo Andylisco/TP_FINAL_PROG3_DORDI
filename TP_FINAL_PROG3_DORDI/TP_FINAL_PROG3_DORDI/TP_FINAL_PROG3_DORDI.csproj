@@ -123,6 +123,8 @@
     <Content Include="FormVentas.aspx" />
     <Content Include="Imagenes\Comercio.jpg" />
     <Content Include="Imagenes\Depocito.png" />
+    <Content Include="Listado_MovVarios.aspx" />
+    <Content Include="MovVarios.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -310,6 +312,20 @@
     </Compile>
     <Compile Include="FormVentas.aspx.designer.cs">
       <DependentUpon>FormVentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Listado_MovVarios.aspx.cs">
+      <DependentUpon>Listado_MovVarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Listado_MovVarios.aspx.designer.cs">
+      <DependentUpon>Listado_MovVarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MovVarios.aspx.cs">
+      <DependentUpon>MovVarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MovVarios.aspx.designer.cs">
+      <DependentUpon>MovVarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>

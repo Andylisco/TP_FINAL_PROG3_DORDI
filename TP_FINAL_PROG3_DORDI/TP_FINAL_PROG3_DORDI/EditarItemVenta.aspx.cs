@@ -157,9 +157,6 @@ namespace TP_FINAL_PROG3_DORDI
             Neg_Producto NegProd = new Neg_Producto();
 
             Prod = NegProd.GetSingle(int.Parse(cbx_Producto.SelectedValue));
-            /*Prod.ID = long.Parse(cbx_Producto.SelectedValue);
-            Prod.Codigo = 
-            Prod.Descripcion = cbx_Producto.Text;*/
             Prod.Cantidad_Compra = int.Parse(txt_Cantidad.Text);
             Prod.Precio_U = decimal.Parse(txt_Precio.Text);
 

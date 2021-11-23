@@ -92,4 +92,13 @@ Estado bit not null default(1)
 ) 
 go
 
+Create Table MovVarios(
+ID bigint primary key identity(1,1),
+ID_Producto bigint not null foreign key references Productos(ID),
+Cantidad int not null,
+Fecha date not null,
+Motivo varchar(200) not null,
+Estado bit not null default(1)
+)
+go
 
