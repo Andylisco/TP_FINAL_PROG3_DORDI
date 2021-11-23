@@ -14,6 +14,7 @@ namespace TP_FINAL_PROG3_DORDI
         public List<Producto> ListaProductos { get; set; }
         public int NivelUsuario { get; set; }
 
+        public decimal ImporteTotal { get; set; }
         public string TipoVista { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -117,8 +118,26 @@ namespace TP_FINAL_PROG3_DORDI
                             lbl_TituloCargar.Visible = false;
 
                         }
+
                     }
                 }
+
+
+                //SI LA LISTA DE DE PRODUCTOS TIENE ALGO CALCULO EL TOTAL IMPORTE
+
+                ImporteTotal = 0;
+                if (ListaProductos != null)
+                {
+                    if (ListaProductos.Count > 0)
+                    {
+                        foreach (Producto Prod in ListaProductos)
+                        {
+                            ImporteTotal += (Prod.Cantidad_Compra * Prod.Precio_U);
+                        }
+                    }
+                }
+
+                txt_ImporteTotal.Text = ImporteTotal.ToString();
 
                 //GUARDO LOS VALORES 
                 Session.Add("DNICliente", txt_ApellidoNombre.Text);
@@ -292,8 +311,8 @@ namespace TP_FINAL_PROG3_DORDI
         protected void AgregarProd_Click(object sender, EventArgs e)
         {
             Session.Add("DNICliente", txt_DNICliente.Text);
-             Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
-             Session.Add("MedPag", cbx_MedioPago.SelectedValue);
+            Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
+            Session.Add("MedPag", cbx_MedioPago.SelectedValue);
             Response.Redirect("EditarItemVenta");
         }
 
@@ -309,7 +328,7 @@ namespace TP_FINAL_PROG3_DORDI
                 try
                 {
                     Clien = NegCli.GetSingle(txt_DNICliente.Text);
-                    txt_ApellidoNombre.Text = Clien.Apellido + " " + Clien.Nombre ;
+                    txt_ApellidoNombre.Text = Clien.Apellido + " " + Clien.Nombre;
                 }
                 catch (Exception)
                 {

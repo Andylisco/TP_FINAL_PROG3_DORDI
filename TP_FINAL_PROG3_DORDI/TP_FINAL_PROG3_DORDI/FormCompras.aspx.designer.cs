@@ -141,6 +141,24 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.DropDownList cbx_MedioPago;
 
         /// <summary>
+        /// Control lbl_ImporteTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_ImporteTotal;
+
+        /// <summary>
+        /// Control txt_ImporteTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_ImporteTotal;
+
+        /// <summary>
         /// Control btnGrabar.
         /// </summary>
         /// <remarks>

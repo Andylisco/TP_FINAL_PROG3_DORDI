@@ -39,7 +39,7 @@
                 <td><%: Mov.Produc.ID %></td>                
                 <td><%: Mov.Produc.Descripcion %></td>
                 <td><%: Mov.Produc.Cantidad_Compra %></td>
-               <td><%: Mov.Fecha.ToString("dd/MM/yyyy") %></td>
+                <td><%: Mov.Fecha.ToString("dd/MM/yyyy") %></td>
                 <td><%: Mov.Motivo %></td>
 
 

@@ -63,6 +63,11 @@
 
                         </div>
 
+                         <div class="padearControles Separador">
+                                <asp:Label ID="lbl_ImporteTotal" runat="server" for="txt_ImporteTotal" CssClass="form-label" Font-Bold="true" Text="Total Importe" />
+                                <asp:TextBox ID="txt_ImporteTotal" runat="server" ClientIDMode="Static" CssClass="form-control w-100" ReadOnly="true"></asp:TextBox>
+                            </div>
+
 
 
                         <div class="Separador">
@@ -94,12 +99,11 @@
                                     <%if ( (ListaProductos != null) && (ListaProductos.Count > 0))
                                         {%>
                                     <%foreach (var Producto in ListaProductos)
-                                        {
+                                        {                                         
                                            %>
                                     <tr>
-                                        <th scope="row"><%:  Producto.Codigo  %>
-                                        </td>
-                                <td><%: Producto.Descripcion  %></td>
+                                        <th scope="row"><%:  Producto.Codigo  %></td>
+                                        <td><%: Producto.Descripcion  %></td>
                                         <td><%: Producto.Cantidad_Compra %></td>
                                         <td><%: Producto.Precio_U %></td>
 
@@ -112,7 +116,8 @@
                                         <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
                                         <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
                                         <%}
-                                            } %>
+                                            }
+                                           %>
                                     </tr>
                                     <% }
                                         }%>

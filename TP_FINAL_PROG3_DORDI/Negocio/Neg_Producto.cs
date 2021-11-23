@@ -170,7 +170,7 @@ namespace Negocio
                 }
             }
 
-            //DESCOMENTAR DESPUES DE CREAR VENTAS
+            //DESCONTAMOS EL STOCK DE VENTAS
            AccesoDatos datos2 = new AccesoDatos();
 
             datos2.setearConsulta("SELECT StockVentas = SUM(Cantidad) FROM Ventas WHERE ID_Producto = @ID_Producto AND Estado = 1");
@@ -185,6 +185,25 @@ namespace Negocio
                     stock -= (int)datos2.Lector["StockVentas"];
                 }
             }
+
+
+            //AUMENTO O DESCUENTO EL STOCK DE MOVIMIENTOS VARIOS
+            AccesoDatos datos3 = new AccesoDatos();
+
+            datos3.setearConsulta("SELECT Cantidad = Sum(Cantidad) FROM MovVarios WHERE Estado = 1 AND ID_Producto = @ID_Producto");
+            datos3.setearParametros("@ID_Producto", ID);
+
+            datos3.ejecutarLectura();
+
+            while (datos3.Lector.Read())
+            {
+                if (!(datos3.Lector["Cantidad"] is DBNull))
+                {
+                    stock += (int)datos3.Lector["Cantidad"];
+                }
+            }
+
+            
 
             return stock;
         }

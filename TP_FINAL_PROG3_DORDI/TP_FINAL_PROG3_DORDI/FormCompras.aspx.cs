@@ -13,6 +13,7 @@ namespace TP_FINAL_PROG3_DORDI
     {
         public List<Producto> ListaProductos { get; set; }
         public int NivelUsuario { get; set; }
+        public decimal ImporteTotal { get; set; }
 
         public string TipoVista { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -119,6 +120,24 @@ namespace TP_FINAL_PROG3_DORDI
                         }
                     }
                 }
+
+
+                //SI LA LISTA DE DE PRODUCTOS TIENE ALGO CALCULO EL TOTAL IMPORTE
+
+                ImporteTotal = 0;
+                if (ListaProductos != null)
+                {
+                    if (ListaProductos.Count > 0)
+                    {
+                        foreach (Producto Prod in ListaProductos)
+                        {
+                            ImporteTotal += (Prod.Cantidad_Compra * Prod.Precio_U);
+                        }
+                    }
+                }
+
+                txt_ImporteTotal.Text = ImporteTotal.ToString();
+
 
                 //GUARDO LOS VALORES 
                 Session.Add("CuitProv", txt_CUITProv.Text);
