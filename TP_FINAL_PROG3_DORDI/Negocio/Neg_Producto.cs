@@ -171,10 +171,12 @@ namespace Negocio
             }
 
             //DESCOMENTAR DESPUES DE CREAR VENTAS
-          /*  AccesoDatos datos2 = new AccesoDatos();
+           AccesoDatos datos2 = new AccesoDatos();
 
             datos2.setearConsulta("SELECT StockVentas = SUM(Cantidad) FROM Ventas WHERE ID_Producto = @ID_Producto AND Estado = 1");
             datos2.setearParametros("@ID_Producto", ID);
+            
+            datos2.ejecutarLectura();
 
             while (datos2.Lector.Read())
             {
@@ -182,7 +184,7 @@ namespace Negocio
                 {
                     stock -= (int)datos2.Lector["StockVentas"];
                 }
-            }*/
+            }
 
             return stock;
         }
@@ -202,7 +204,7 @@ namespace Negocio
             datos.setearConsulta(ListaSQLCnslt.ToArray());
 
             //BUSCO EL MEJOR PRECiO EN LOS ULTIMOS 3 MESES
-            
+
             datos.setearParametros("@ID", ID);
             datos.setearParametros("@FechaAtras", DateTime.Now.AddMonths(-3));
             datos.setearParametros("@FechaActual", DateTime.Now);
@@ -220,7 +222,7 @@ namespace Negocio
                 }
                 else
                 {
-                  
+
 
                     //SINO TENGO UN PRECIO EN LOS ULTIMOS 3 MESES BUSCO EL MEJOR PRECIO
                     AccesoDatos datos2 = new AccesoDatos();
@@ -229,7 +231,7 @@ namespace Negocio
                     ListaSQLCnslt2.Add("SELECT MaxPrecio = Max(PrecioU) FROM Compras WHERE ID_Producto = @ID");
 
                     datos2.setearConsulta(ListaSQLCnslt2.ToArray());
-                    
+
                     datos2.setearParametros("@ID", ID);
 
                     datos2.ejecutarLectura();
@@ -250,12 +252,31 @@ namespace Negocio
 
                 }
 
-               
+
             }
             //CIERRO LA CONEXION 
             datos.cerrarConexion();
 
-            return PrecioU;
+            AccesoDatos datos3 = new AccesoDatos();
+            datos3.setearConsulta("SELECT Ganancia = PorcentajeGanancia FROM Productos WHERE ID = @ID");
+            datos3.setearParametros("@ID", ID);
+
+            datos3.ejecutarLectura();
+
+
+            decimal Ganancia = 1;
+
+            while (datos3.Lector.Read())
+            {
+                if (!(datos3.Lector["Ganancia"] is DBNull))
+                {                    
+                    Ganancia = decimal.Parse(datos3.Lector["Ganancia"].ToString()) / 100;
+                }
+            }
+
+            datos3.cerrarConexion();
+
+            return PrecioU * Ganancia;
         }
 
         public string _ObtenerCodigoRubro_XID(int id)
