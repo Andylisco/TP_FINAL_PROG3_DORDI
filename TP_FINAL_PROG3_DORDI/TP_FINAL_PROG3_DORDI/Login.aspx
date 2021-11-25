@@ -69,7 +69,7 @@
                     </div>
                     <asp:TextBox runat="server" class="form-control" ID="txt_Contraseña" Type="Password" />
                     <div>
-                        <asp:Label ID="Msg_ErrorLogin" Text="Usuario o contraseña incorrecto." runat="server" class="form-text" Style="color: orangered" />
+                        <asp:Label ID="Msg_ErrorLogin" Text="Usuario o contraseña incorrecto." runat="server"  Style="color: red" />
                     </div>
                 </div>
 

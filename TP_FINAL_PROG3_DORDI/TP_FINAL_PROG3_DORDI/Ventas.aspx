@@ -14,7 +14,7 @@
     <hr />
 
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <a href="/FormVentas" class="btn btn-primary">NUEVA VENTA</a>
+        <a href="/FormVentas?Nro=&Mod=N" class="btn btn-primary">NUEVA VENTA</a>
         <button type="button" class="btn btn-secondary">2</button>
 
         <!--<div class="btn-group" role="group">

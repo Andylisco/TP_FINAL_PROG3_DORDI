@@ -61,7 +61,7 @@ namespace TP_FINAL_PROG3_DORDI
                         }
                         else
                         {
-                            if (Tipo == "MA")
+                            if (Tipo == "RM")
                             {
 
                                 txt_DNICliente.Text = Session["DNICliente"].ToString();
@@ -91,7 +91,14 @@ namespace TP_FINAL_PROG3_DORDI
                     }
                     else
                     {
-                        if (Tipo == "NA")
+                        if (Tipo == "N")
+                        {
+                            //ES UNA NUEVA VENTA LIMPIO LA LISTA DE ITEM
+                            Session.Remove("ListaProductosVenta");
+                            Session.Remove("Venta");
+                        }
+
+                            if (Tipo == "NA")
                         {
                             txt_DNICliente.Text = Session["DNICliente"].ToString();
                             txt_DNICliente_TextChanged(null, null);
@@ -140,7 +147,7 @@ namespace TP_FINAL_PROG3_DORDI
                 txt_ImporteTotal.Text = ImporteTotal.ToString();
 
                 //GUARDO LOS VALORES 
-                Session.Add("DNICliente", txt_ApellidoNombre.Text);
+                Session.Add("DNICliente", txt_DNICliente.Text);
                 Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
                 Session.Add("MedPag", cbx_MedioPago.SelectedValue);
 
@@ -214,6 +221,14 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
 
             Neg_Venta NgVent = new Neg_Venta();
             Venta vent = new Venta();

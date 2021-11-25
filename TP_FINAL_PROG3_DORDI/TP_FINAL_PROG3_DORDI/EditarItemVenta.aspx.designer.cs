@@ -105,6 +105,24 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.TextBox txt_Cantidad;
 
         /// <summary>
+        /// Control lbl_StockActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_StockActual;
+
+        /// <summary>
+        /// Control txt_StockActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_StockActual;
+
+        /// <summary>
         /// Control lbl_Precio.
         /// </summary>
         /// <remarks>

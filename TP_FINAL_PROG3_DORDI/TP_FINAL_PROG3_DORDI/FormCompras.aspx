@@ -62,10 +62,10 @@
 
                         </div>
 
-                         <div class="padearControles Separador">
-                                <asp:Label ID="lbl_ImporteTotal" runat="server" for="txt_ImporteTotal" CssClass="form-label" Font-Bold="true" Text="Total Importe" />
-                                <asp:TextBox ID="txt_ImporteTotal" runat="server" ClientIDMode="Static" CssClass="form-control w-100" ReadOnly="true"></asp:TextBox>
-                            </div>
+                        <div class="padearControles Separador">
+                            <asp:Label ID="lbl_ImporteTotal" runat="server" for="txt_ImporteTotal" CssClass="form-label" Font-Bold="true" Text="Total Importe" />
+                            <asp:TextBox ID="txt_ImporteTotal" runat="server" ClientIDMode="Static" CssClass="form-control w-100" ReadOnly="true"></asp:TextBox>
+                        </div>
 
 
 
@@ -95,11 +95,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%if ( (ListaProductos != null) && (ListaProductos.Count > 0))
+                                    <%if ((ListaProductos != null) && (ListaProductos.Count > 0))
                                         {%>
                                     <%foreach (var Producto in ListaProductos)
                                         {
-                                           %>
+                                    %>
                                     <tr>
                                         <th scope="row"><%:  Producto.Codigo  %>
                                         </td>

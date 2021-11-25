@@ -61,7 +61,7 @@ namespace TP_FINAL_PROG3_DORDI
                         }
                         else
                         {
-                            if (Tipo == "MA")
+                            if (Tipo == "RM")
                             {
                                 
                                     txt_CUITProv.Text = Session["CuitProv"].ToString();
@@ -91,7 +91,14 @@ namespace TP_FINAL_PROG3_DORDI
                     }
                     else
                     {
-                        if (Tipo == "NA")
+                        if (Tipo == "N")
+                        {
+                            //ES UNA NUEVA VENTA LIMPIO LA LISTA DE ITEM
+                            Session.Remove("ListaProductosCompra");
+                            Session.Remove("Compra");
+                        }
+
+                            if (Tipo == "NA")
                         {
                             txt_CUITProv.Text = Session["CuitProv"].ToString();
                             txt_CUITProv_TextChanged(null, null);
@@ -311,9 +318,9 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void AgregarProd_Click(object sender, EventArgs e)
         {
-           /* Session.Add("CuitProv", txt_CUITProv.Text);
+            Session.Add("CuitProv", txt_CUITProv.Text);
             Session.Add("TipoFac", cbx_TipoFactura.SelectedValue);
-            Session.Add("MedPag", cbx_MedioPago.SelectedValue);*/
+            Session.Add("MedPag", cbx_MedioPago.SelectedValue);
             Response.Redirect("EditarItemComp");
         }
 

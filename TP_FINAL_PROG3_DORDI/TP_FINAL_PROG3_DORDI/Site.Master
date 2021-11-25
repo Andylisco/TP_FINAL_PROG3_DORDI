@@ -38,20 +38,20 @@
                      <li class="nav-item">
                        <a class="nav-link" href="/Clientes">CLIENTES</a>
                      </li>
+                        <%if (NivelUsuario == 0)
+                            { %>
                        <li class="nav-item">
                        <a class="nav-link" href="/Proveedores">PROVEEDORES</a>
                      </li>                     
+                       <li class="nav-item">
+                       <a class="nav-link" href="/Compras">COMPRAS</a>
+                     </li>
+                       <%} %>
                        </li>
                        <li class="nav-item">
                        <a class="nav-link" href="/Ventas">VENTAS</a>
                      </li>
                        </li>
-                        <%if (NivelUsuario == 0)
-                            { %>
-                       <li class="nav-item">
-                       <a class="nav-link" href="/Compras">COMPRAS</a>
-                     </li>
-                       <%} %>
                    </ul>
 
                      <div class="navbar-nav ml-auto">

@@ -2,6 +2,54 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+
+    <script>
+
+        function ValidarVenta() {
+            var Bloquear = true;
+            console.log("Entre a la validacion")
+
+            var NumeroEnteroRegex = /^\d+$/;
+            //PARTE DE VALIDACION DEL DNI
+            
+            document.getElementById("error_NoVacio").style.display = "none";
+            document.getElementById("error_LongitudDNI").style.display = "none";
+            document.getElementById("error_SoloNumDNI").style.display = "none";
+            var DNI = document.getElementById("txt_DNICliente").value;
+            if (DNI == "") {
+                document.getElementById("txt_DNICliente").classList.remove("is-valid");
+                document.getElementById("txt_DNICliente").classList.add("is-invalid");
+                document.getElementById("error_NoVacio").style.display = "";
+                Bloquear = false;
+                console.log("Esta Vacio")
+                
+            } 
+            if (DNI.length < 8) {
+                document.getElementById("txt_DNICliente").classList.remove("is-valid");
+                document.getElementById("txt_DNICliente").classList.add("is-invalid");
+                document.getElementById("error_LongitudDNI").style.display = "";
+                Bloquear = false;
+                console.log("No cumple el rango")
+            } 
+            if (!NumeroEnteroRegex.test(DNI)) {
+                document.getElementById("txt_DNICliente").classList.remove("is-valid");
+                document.getElementById("txt_DNICliente").classList.add("is-invalid");
+                document.getElementById("error_SoloNumDNI").style.display = "";
+                Bloquear = false;
+                console.log("No son numeros")
+            }
+
+            if (Bloquear == true) {
+                document.getElementById("txt_DNICliente").classList.remove("is-invalid");
+                document.getElementById("txt_DNICliente").classList.add("is-valid");
+            }
+
+            //PARTE DE VALIDACION DE STOCK
+            
+
+            return Bloquear;
+        }
+    </script>
     
     <hr />
     <hr />
@@ -38,7 +86,10 @@
                                 <div class="AlinearCbx w-100">
                                     <div class="Separador w-100">
                                         <asp:Label ID="lbl_DNICliente" runat="server" for="txt_DNICliente" CssClass="form-label" Font-Bold="true" Text="DNI Cliente"></asp:Label>
-                                        <asp:TextBox ID="txt_DNICliente" runat="server" OnTextChanged="txt_DNICliente_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                        <asp:TextBox ID="txt_DNICliente" MaxLength="8" runat="server" OnTextChanged="txt_DNICliente_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                        <span ID="error_NoVacio"  style=" color : red; display: none" >* Es un campo obligatorio</span>
+                                          <span ID="error_LongitudDNI"  style=" color : red; display: none" >* Debe tener 8 caracteres</span>
+                                          <span ID="error_SoloNumDNI"  style=" color : red; display: none" >* Debe ser un Numero Entero, mayor a 0</span>
                                     </div>
                                     <div class="Separador w-100">
                                         <asp:Label ID="lbl_ApellidoNombre" runat="server" for="txt_ApellidoNombre" CssClass="form-label" Font-Bold="true" Text="Apellido y Nombre"></asp:Label>
@@ -74,7 +125,7 @@
 
                             <%if (TipoVista != "V")
                                 {%>
-                            <asp:Button Text="GRABAR VENTA" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="GRABAR VENTA" ID="btnGrabar" OnClientClick="return ValidarVenta();" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
 
                             <asp:Button Text="ACTUALIZA VENTA" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
                             <%} %>
@@ -109,15 +160,12 @@
 
 
 
-                                        <%if (NivelUsuario == 0)
-                                            {
-                                                if (TipoVista != "V")
+                                        <%if (TipoVista != "V")
                                                 {%>
                                         <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=M" class="btn btn-primary">MODIFICAR</a> </td>
                                         <td><a href="EditarItemVenta.aspx?ID=<%: Producto.ID %>&Mod=E" class="btn btn-danger">ELIMINAR</a> </td>
                                         <%}
-                                            }
-                                           %>
+                                          %>
                                     </tr>
                                     <% }
                                         }%>
@@ -129,7 +177,7 @@
 
                     <%if (TipoVista != "V")
                         {%>
-                    <asp:Button Text="AGREGAR PRODUCTO" runat="server" OnClick="AgregarProd_Click" CssClass="btn btn-primary" />
+                    <asp:Button Text="AGREGAR PRODUCTO" runat="server"  OnClick="AgregarProd_Click" CssClass="btn btn-primary" />
                     <%} %>
                 </div>
             </div>

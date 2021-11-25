@@ -108,10 +108,14 @@ namespace TP_FINAL_PROG3_DORDI
                     txt_Precio.Enabled = false;
 
                 }
+                
             }
         }
 
-        protected void _EliminarItem(int ID)
+
+
+    
+    protected void _EliminarItem(int ID)
         {
             Producto ProductoSacar = new Producto();
             foreach (Producto Prod in ListaProductos)
@@ -128,18 +132,28 @@ namespace TP_FINAL_PROG3_DORDI
 
             if (VentaActual == null)
             {
-                //VUELVO A LA PAGINA DE COMPRA NUEVA
+                //VUELVO A LA PAGINA DE VENTA NUEVA
                 Response.Redirect("FormVentas?Mod=NA");
             }
             else
             {
-                //VUELVO A LA PAGINA DE LA COMPRA DE MODIFICAR
+                //VUELVO A LA PAGINA DE LA VENTA DE MODIFICAR
                 Response.Redirect("FormVentas?Nro=" + VentaActual.Nro + "&Mod=RM");
             }
         }
 
         protected void Agregar_Click(object sender, EventArgs e)
         {
+            
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             if (ListaProductos == null)
             {
                 ListaProductos = (List<Producto>)Session["ListaProductosVenta"];
@@ -151,7 +165,21 @@ namespace TP_FINAL_PROG3_DORDI
                 }
             }
 
-
+            //BUSCO SI YA HAY UN PRODUCTO PARA ESTE ID
+            int IndexSacar = -1;
+            foreach (Producto P in ListaProductos)
+            {
+                if (P.ID == long.Parse(cbx_Producto.SelectedValue))
+                {
+                    //GUARDO EL INDEX DEL PRODUCTO EN LA LISTA
+                    IndexSacar = ListaProductos.IndexOf(P);
+                }
+            }
+            //SI LO HAY LO SACO
+            if (IndexSacar != -1)
+            {
+                ListaProductos.RemoveAt(IndexSacar);
+            }
 
             Producto Prod = new Producto();
             Neg_Producto NegProd = new Neg_Producto();
@@ -160,7 +188,7 @@ namespace TP_FINAL_PROG3_DORDI
             Prod.Cantidad_Compra = int.Parse(txt_Cantidad.Text);
             Prod.Precio_U = decimal.Parse(txt_Precio.Text);
 
-
+            //AGREGO EL NUEVO PRODUCTO A LA LISTA Y LA ACTUALIZO EN SESSION
             ListaProductos.Add(Prod);
             Session.Remove("ListaProductosVenta");
             Session.Add("ListaProductosVenta", ListaProductos);
@@ -169,6 +197,8 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void cbxActualizar_SelectedIndexChanged(object sender, EventArgs e)
         {
+                     
+
             Neg_Producto NegProd = new Neg_Producto();
 
 
@@ -178,13 +208,21 @@ namespace TP_FINAL_PROG3_DORDI
             cbx_Producto.DataTextField = "Descripcion";
             cbx_Producto.DataBind();
 
-            //BUSCO EL PRECIO DEL PRODUCTO SI TIENE UNO
+            //BUSCO EL PRECIO DEL PRODUCTO SI TIENE UNO Y STOCK
             cbx_Producto_SelectedIndexChanged(null, null);
 
         }
 
         protected void Actualizar_Click(object sender, EventArgs e)
         {
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             if (ListaProductos == null)
             {
                 ListaProductos = (List<Producto>)Session["ListaProductosVenta"];
@@ -228,6 +266,15 @@ namespace TP_FINAL_PROG3_DORDI
                 Neg_Producto neg_Producto = new Neg_Producto();
                 txt_Precio.Text = neg_Producto._ObtenerPrecioUnitario(long.Parse(cbx_Producto.SelectedValue.ToString())).ToString();
                 txt_Precio.ReadOnly = true;
+
+                //GUARDAR STOCK DE PRODUCTO ACTUAL
+                decimal StockActualDelProd = neg_Producto._ObtenerStock(cbx_Producto.SelectedValue);
+                txt_StockActual.Text = StockActualDelProd.ToString();
+            }
+            else {
+                //SI NO EXITE EL PRODUCTO CAMBIO EL PRECIO Y EL STOCK A VACIO
+                txt_Precio.Text = "";
+                txt_StockActual.Text = "";
             }
         }
     }

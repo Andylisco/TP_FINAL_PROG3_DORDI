@@ -144,7 +144,21 @@ namespace Negocio
 
         }
 
-        public int _ObtenerStock(long ID)
+        public int _ObtenerStock(string ID)
+        {
+            if (ID == "")
+            {
+                return 0;
+            }
+            else {
+                long IDlong = long.Parse(ID);
+                Neg_Producto NGP = new Neg_Producto();
+                return NGP._ObtenerStock(IDlong);
+            }
+
+        }
+
+            public int _ObtenerStock(long ID)
         {
             int stock = 0;
 

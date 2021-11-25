@@ -26,7 +26,7 @@
         function validar() {
 
             var Dni = document.getElementById("txt_DNI").value;
-console.log(Dni)
+            console.log(Dni)
             var Nombre = document.getElementById("txt_Nombre").value;
             console.log(Nombre)
             var Apellido = document.getElementById("txt_Apellido").value;
