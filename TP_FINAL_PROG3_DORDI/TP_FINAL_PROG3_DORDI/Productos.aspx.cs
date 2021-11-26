@@ -18,17 +18,33 @@ namespace TP_FINAL_PROG3_DORDI
         {
 
             if (!IsPostBack)
-            { 
-            Neg_Producto NegPro = new Neg_Producto();
+            {
 
-            ListadoProductos = NegPro.GetAll();
+                
+                Neg_Producto NegPro = new Neg_Producto();
+
+                var F = Request.QueryString["F"] != null ? Request.QueryString["F"].ToString() : "";
+
+                if (F != "")
+                {
+                    ListadoProductos = NegPro.GetAll("AND (Pr.Codigo LIKE '%" + F + "%' OR Pr.Descripcion LIKE '%" + F + "%' OR M.Descripcion LIKE '%" + F + "%' OR R.Descripcion LIKE '%" + F + "%')");
+                    txt_Buscador.Text = F;
+                }
+                else {
+                    ListadoProductos = NegPro.GetAll();
+                }
+
+                
 
                 NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
                 
             }
         }
 
-
-       
+        protected void BUSCAR_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("Productos?F=" + txt_Buscador.Text );
+        }
     }
 }

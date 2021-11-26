@@ -2,6 +2,55 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+     <script>
+
+        function ValidarCompra() {
+            var Bloquear = true;
+            console.log("Entre a la validacion")
+
+            var NumeroEnteroRegex = /^\d+$/;
+            //PARTE DE VALIDACION DEL DNI
+            
+            document.getElementById("error_NoVacio").style.display = "none";
+            document.getElementById("error_LongitudCuit").style.display = "none";
+            document.getElementById("error_SoloNumCuit").style.display = "none";
+            var Cuit = document.getElementById("txt_CUITProv").value;
+            if (Cuit == "") {
+                document.getElementById("txt_CUITProv").classList.remove("is-valid");
+                document.getElementById("txt_CUITProv").classList.add("is-invalid");
+                document.getElementById("error_NoVacio").style.display = "";
+                Bloquear = false;
+                console.log("Esta Vacio")
+                
+            } 
+            if (Cuit.length < 8) {
+                document.getElementById("txt_CUITProv").classList.remove("is-valid");
+                document.getElementById("txt_CUITProv").classList.add("is-invalid");
+                document.getElementById("error_LongitudCuit").style.display = "";
+                Bloquear = false;
+                console.log("No cumple el rango")
+            } 
+            if (!NumeroEnteroRegex.test(Cuit)) {
+                document.getElementById("txt_CUITProv").classList.remove("is-valid");
+                document.getElementById("txt_CUITProv").classList.add("is-invalid");
+                document.getElementById("error_SoloNumCuit").style.display = "";
+                Bloquear = false;
+                console.log("No son numeros")
+            }
+
+            if (Bloquear == true) {
+                document.getElementById("txt_CUITProv").classList.remove("is-invalid");
+                document.getElementById("txt_CUITProv").classList.add("is-valid");
+            }
+
+            //PARTE DE VALIDACION DE STOCK
+            
+
+            return Bloquear;
+        }
+     </script>
+    
+
     <hr />
     <hr />
 
@@ -37,7 +86,10 @@
                                 <div class="AlinearCbx w-100">
                                     <div class="Separador w-100">
                                         <asp:Label ID="lbl_CUITProv" runat="server" for="txt_CUITProv" CssClass="form-label" Font-Bold="true" Text="CUIT Prov."></asp:Label>
-                                        <asp:TextBox ID="txt_CUITProv" runat="server" OnTextChanged="txt_CUITProv_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                        <asp:TextBox ID="txt_CUITProv" runat="server" MaxLength="11" OnTextChanged="txt_CUITProv_TextChanged" ClientIDMode="Static" CssClass="form-control " AutoPostBack="true"></asp:TextBox>
+                                         <span ID="error_NoVacio"  style=" color : red; display: none" >* Es un campo obligatorio</span>
+                                          <span ID="error_LongitudCuit"  style=" color : red; display: none" >* Debe tener 11 caracteres</span>
+                                          <span ID="error_SoloNumCuit"  style=" color : red; display: none" >* Debe ser un Numero Entero, mayor a 0</span>
                                     </div>
                                     <div class="Separador w-100">
                                         <asp:Label ID="lbl_DescpProv" runat="server" for="txt_DescpProv" CssClass="form-label" Font-Bold="true" Text="Descp. Prov."></asp:Label>
@@ -73,9 +125,9 @@
 
                             <%if (TipoVista != "V")
                                 {%>
-                            <asp:Button Text="GRABAR COMPRA" ID="btnGrabar" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="GRABAR COMPRA" ID="btnGrabar" OnClientClick="return ValidarCompra();" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
 
-                            <asp:Button Text="ACTUALIZA COMPRA" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="ACTUALIZA COMPRA" ID="btnActualizar" OnClientClick="return ValidarCompra();" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
                             <%} %>
                         </div>
 

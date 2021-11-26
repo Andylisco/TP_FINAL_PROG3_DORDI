@@ -132,6 +132,14 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void Agregar_Click(object sender, EventArgs e)
         {
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             if (ListaProductos == null)
             {
                 ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
@@ -177,6 +185,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void Actualizar_Click(object sender, EventArgs e)
         {
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             if (ListaProductos == null)
             {
                 ListaProductos = (List<Producto>)Session["ListaProductosCompra"];

@@ -41,3 +41,15 @@
     display: flex;
     align-items: center;
 }
+
+.flex {
+    display: flex;
+    justify-content: end;
+}
+
+.TamañoDelLadoBuscador {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    width: 70%
+}    

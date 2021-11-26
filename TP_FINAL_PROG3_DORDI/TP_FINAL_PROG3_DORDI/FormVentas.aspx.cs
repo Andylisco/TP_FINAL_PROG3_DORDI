@@ -279,6 +279,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             //Obtengo El Numero De La Venta
             int Nro = int.Parse(Session["NumeroVenta"].ToString());
 

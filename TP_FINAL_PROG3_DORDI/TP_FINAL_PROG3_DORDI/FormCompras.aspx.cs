@@ -222,6 +222,13 @@ namespace TP_FINAL_PROG3_DORDI
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
 
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             Neg_Compra NgComp = new Neg_Compra();
             Compra Comp = new Compra();
 
@@ -246,11 +253,22 @@ namespace TP_FINAL_PROG3_DORDI
 
             ListaProductos = (List<Producto>)Session["ListaProductosCompra"];
 
+
+            if (ListaProductos == null)
+            {
+                ListaProductos = new List<Producto>();
+            }
+
+
             Comp.Productos = new List<Producto>();
 
-            foreach (Producto Prod in ListaProductos)
+            if (ListaProductos.Count > 0)
             {
-                Comp.Productos.Add(Prod);
+                foreach (Producto Prod in ListaProductos)
+                {
+                    Comp.Productos.Add(Prod);
+
+                }
             }
 
             
@@ -272,6 +290,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             //Obtengo El Numero De La compra
             int Nro = int.Parse(Session["NumeroCompra"].ToString());
             

@@ -127,7 +127,7 @@
                                 {%>
                             <asp:Button Text="GRABAR VENTA" ID="btnGrabar" OnClientClick="return ValidarVenta();" OnClick="btnGrabar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
 
-                            <asp:Button Text="ACTUALIZA VENTA" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
+                            <asp:Button Text="ACTUALIZA VENTA" ID="btnActualizar" OnClientClick="return ValidarVenta();" OnClick="btnActualizar_Click" runat="server" CssClass="btn btn-primary CentrarFormularios" />
                             <%} %>
                         </div>
 
