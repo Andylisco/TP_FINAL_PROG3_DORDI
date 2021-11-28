@@ -152,17 +152,7 @@ namespace TP_FINAL_PROG3_DORDI
         }
 
 
-        protected void txt_DNI_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_DNI.Text.Contains("-"))
-            {
-                lbl_ayudaDNI.Visible = true;
-            }
-            else
-            {
-                lbl_ayudaDNI.Visible = false;
-            }
-        }
+      
     }
 
 

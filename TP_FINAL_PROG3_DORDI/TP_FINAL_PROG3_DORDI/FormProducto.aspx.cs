@@ -19,8 +19,8 @@ namespace TP_FINAL_PROG3_DORDI
                 txt_Codigo.MaxLength = 6;
                 txt_Descripcion.MaxLength = 50;
                 txt_URLImagen.MaxLength = 250;
-                txt_StockMinimo.MaxLength = 20;
-                txt_PorcentajeGanancia.MaxLength = 4;
+                txt_StockMinimo.MaxLength = 15;
+                txt_PorcentajeGanancia.MaxLength =3;
                 cbx_Rubro.SelectedIndex = 0;
                 cbx_Marca.SelectedIndex = 0;
                 lbl_TituloActualiza.Visible = false;

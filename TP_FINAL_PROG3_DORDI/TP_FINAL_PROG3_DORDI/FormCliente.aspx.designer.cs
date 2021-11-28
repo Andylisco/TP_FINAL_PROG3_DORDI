@@ -51,15 +51,6 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.TextBox txt_DNI;
 
         /// <summary>
-        /// Control lbl_ayudaDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ayudaDNI;
-
-        /// <summary>
         /// Control lbl_Nombre.
         /// </summary>
         /// <remarks>
@@ -76,15 +67,6 @@ namespace TP_FINAL_PROG3_DORDI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_Nombre;
-
-        /// <summary>
-        /// Control lbl_AyudaNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaNombre;
 
         /// <summary>
         /// Control lbl_Apellido.
@@ -105,15 +87,6 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.TextBox txt_Apellido;
 
         /// <summary>
-        /// Control lbl_ayudaApellido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ayudaApellido;
-
-        /// <summary>
         /// Control lbl_Direccion.
         /// </summary>
         /// <remarks>
@@ -132,15 +105,6 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.TextBox txt_Direccion;
 
         /// <summary>
-        /// Control lbl_AyudaDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaDireccion;
-
-        /// <summary>
         /// Control txt_Telefono.
         /// </summary>
         /// <remarks>
@@ -150,15 +114,6 @@ namespace TP_FINAL_PROG3_DORDI
         protected global::System.Web.UI.WebControls.TextBox txt_Telefono;
 
         /// <summary>
-        /// Control lbl_AyudaTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaTelefono;
-
-        /// <summary>
         /// Control txt_EMail.
         /// </summary>
         /// <remarks>
@@ -166,15 +121,6 @@ namespace TP_FINAL_PROG3_DORDI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_EMail;
-
-        /// <summary>
-        /// Control lbl_AyudaEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_AyudaEmail;
 
         /// <summary>
         /// Control btnGrabar.
