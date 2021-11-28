@@ -24,7 +24,7 @@ namespace Negocio
                                     "WHERE ID = @ID");
 
             Datos.setearConsulta(ListaSQLCnslt.ToArray());
-            
+
             Datos.setearParametros("@ID", ID);
 
             Datos.ejecutarLectura();
@@ -66,7 +66,7 @@ namespace Negocio
                 if (!(Datos.Lector["Cod_Marca"] is DBNull))
                     Produc.Marca.Codigo = (string)Datos.Lector["Cod_Marca"];
 
-               
+
 
 
             }
@@ -93,7 +93,7 @@ namespace Negocio
                              "WHERE Estado = 1 " + WHERE);
 
                 datos.setearConsulta(ListaSQLCnslt.ToArray());
-                
+
 
 
                 datos.ejecutarLectura();
@@ -101,7 +101,7 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Producto aux = new Producto();
-                    
+
                     aux.ID = long.Parse(datos.Lector["ID"].ToString());
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
@@ -110,12 +110,12 @@ namespace Negocio
                     aux.StockMinimo = (int)datos.Lector["Stock_Minimo"];
                     aux.PorcentajeGanancia = (int)datos.Lector["PorcentajeGanancia"];
 
-                                        
+
                     aux.Rubro = new Rubro();
                     aux.Rubro.Codigo = (string)datos.Lector["Cod_Rubro"];
                     aux.Rubro.Descripcion = (string)datos.Lector["RubroDesc"];
 
-                    
+
                     aux.Marca = new Marca();
                     aux.Marca.Codigo = (string)datos.Lector["Cod_Marca"];
                     aux.Marca.Descripcion = (string)datos.Lector["MarcaDesc"];
@@ -144,13 +144,83 @@ namespace Negocio
 
         }
 
+        public List<Producto> StockMenorAlRecomendato()
+        {
+            List<Producto> lista = new List<Producto>();
+            AccesoDatos datos = new AccesoDatos();
+
+            //RECIBIMOS EL PARAMETRO OPCIONAL Y SE LO AGREGAMOS A LA CONSULTA
+
+            try
+            {
+                List<string> ListaSQLCnslt = new List<string>();
+                ListaSQLCnslt.Add("SELECT Pr.ID, Pr.Codigo, Pr.Descripcion, URL_Imagen = ISNULL(Pr.URL_Imagen,'')," +
+                             " Stock, Stock_Minimo, PorcentajeGanancia , Pr.Cod_Rubro," +
+                             " RubroDesc = ISNULL(R.Descripcion,''), Pr.Cod_Marca, MarcaDesc = ISNULL(M.Descripcion,'') " +
+                             "FROM Productos Pr LEFT JOIN Rubros R on Pr.Cod_Rubro = R.Codigo " +
+                             "LEFT JOIN Marcas M on Pr.Cod_Marca = M.Codigo " +
+                             "WHERE Estado = 1 ");
+
+                datos.setearConsulta(ListaSQLCnslt.ToArray());
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+
+                    aux.ID = long.Parse(datos.Lector["ID"].ToString());
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.URLimagen = (string)datos.Lector["URL_Imagen"];
+                    aux.Stock = _ObtenerStock(aux.ID);
+                    aux.StockMinimo = (int)datos.Lector["Stock_Minimo"];
+                    aux.PorcentajeGanancia = (int)datos.Lector["PorcentajeGanancia"];
+
+
+                    aux.Rubro = new Rubro();
+                    aux.Rubro.Codigo = (string)datos.Lector["Cod_Rubro"];
+                    aux.Rubro.Descripcion = (string)datos.Lector["RubroDesc"];
+
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Codigo = (string)datos.Lector["Cod_Marca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["MarcaDesc"];
+
+
+                    aux.Precio_U = _ObtenerPrecioUnitario(aux.ID);
+
+                    //LO AGREGO A LA LISTA SI EL STOCK ES MENOR AL PRECIO UNITARIO
+                    if (aux.Stock < aux.StockMinimo)
+                    {
+                        lista.Add(aux);
+                    }
+                }
+
+                //DEVUELVO LA LISTA
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
+
         public int _ObtenerStock(string ID)
         {
             if (ID == "")
             {
                 return 0;
             }
-            else {
+            else
+            {
                 long IDlong = long.Parse(ID);
                 Neg_Producto NGP = new Neg_Producto();
                 return NGP._ObtenerStock(IDlong);
@@ -158,7 +228,7 @@ namespace Negocio
 
         }
 
-            public int _ObtenerStock(long ID)
+        public int _ObtenerStock(long ID)
         {
             int stock = 0;
 
@@ -169,7 +239,7 @@ namespace Negocio
 
             datos.setearConsulta(ListaSQLCnslt.ToArray());
 
-            
+
             datos.setearParametros("@ID_Producto", ID);
 
             datos.ejecutarLectura();
@@ -185,11 +255,11 @@ namespace Negocio
             }
 
             //DESCONTAMOS EL STOCK DE VENTAS
-           AccesoDatos datos2 = new AccesoDatos();
+            AccesoDatos datos2 = new AccesoDatos();
 
             datos2.setearConsulta("SELECT StockVentas = SUM(Cantidad) FROM Ventas WHERE ID_Producto = @ID_Producto AND Estado = 1");
             datos2.setearParametros("@ID_Producto", ID);
-            
+
             datos2.ejecutarLectura();
 
             while (datos2.Lector.Read())
@@ -217,7 +287,7 @@ namespace Negocio
                 }
             }
 
-            
+
 
             return stock;
         }
@@ -302,7 +372,7 @@ namespace Negocio
             while (datos3.Lector.Read())
             {
                 if (!(datos3.Lector["Ganancia"] is DBNull))
-                {                    
+                {
                     Ganancia = decimal.Parse(datos3.Lector["Ganancia"].ToString()) / 100;
                 }
             }
@@ -418,7 +488,7 @@ namespace Negocio
                 ListaSQLCnslt.Add("UPDATE Productos SET Estado = 0 WHERE ID = " + ID + "");
 
                 datos.setearConsulta(ListaSQLCnslt.ToArray());
-                
+
                 datos.ejecutarAccion();
             }
             catch (Exception)

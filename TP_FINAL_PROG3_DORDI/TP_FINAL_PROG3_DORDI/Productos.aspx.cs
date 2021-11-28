@@ -27,8 +27,15 @@ namespace TP_FINAL_PROG3_DORDI
 
                 if (F != "")
                 {
-                    ListadoProductos = NegPro.GetAll("AND (Pr.Codigo LIKE '%" + F + "%' OR Pr.Descripcion LIKE '%" + F + "%' OR M.Descripcion LIKE '%" + F + "%' OR R.Descripcion LIKE '%" + F + "%')");
-                    txt_Buscador.Text = F;
+                    if (F == "SST")
+                    {
+                        ListadoProductos = NegPro.StockMenorAlRecomendato();
+                    }
+                    else {
+                        ListadoProductos = NegPro.GetAll("AND (Pr.Codigo LIKE '%" + F + "%' OR Pr.Descripcion LIKE '%" + F + "%' OR M.Descripcion LIKE '%" + F + "%' OR R.Descripcion LIKE '%" + F + "%')");
+                        txt_Buscador.Text = F;
+                    }
+                    
                 }
                 else {
                     ListadoProductos = NegPro.GetAll();

@@ -12,7 +12,7 @@
             display: flex;
             align-items: flex-end;
             justify-content: end;
-            width: 70%
+            width: 60%
         }    
                 
     </style>
@@ -32,6 +32,7 @@
             { %>
         <a href="/FormProducto" class="btn btn-primary">AGREGAR PRODUCTO</a>
         <a href="/Listado_MovVarios" class="btn btn-primary">MOVIMIENTOS VARIOS</a>
+        <a href="/Productos?F=SST" class="btn btn-primary">FALTA COMPRAR</a>
 
         <% }   %>
 

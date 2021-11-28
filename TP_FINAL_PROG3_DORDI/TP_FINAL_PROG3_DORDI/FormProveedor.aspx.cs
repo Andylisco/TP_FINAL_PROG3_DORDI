@@ -103,7 +103,14 @@ namespace TP_FINAL_PROG3_DORDI
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
 
-            
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
+
             Neg_Proveedor negocio = new Neg_Proveedor();
 
 
@@ -128,6 +135,15 @@ namespace TP_FINAL_PROG3_DORDI
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+
+
+            Page.Validate();
+
+            if (!Page.IsValid)
+            {
+                return;
+            }
+
             Neg_Proveedor negocio = new Neg_Proveedor();
 
 
@@ -148,16 +164,6 @@ namespace TP_FINAL_PROG3_DORDI
 
         }
 
-
-            protected void txt_CUIT_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_CUIT.Text.Contains("-"))
-            {
-                lbl_ayudaCuit.Visible = true;
-            }else
-            {
-                lbl_ayudaCuit.Visible = false;
-            }
-        }
+          
     }
 }
