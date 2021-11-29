@@ -20,7 +20,15 @@ namespace TP_FINAL_PROG3_DORDI
         {
             if (!IsPostBack)
             {
-                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                try
+                {
+                    NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                }
+                catch (Exception)
+                {
+
+                    Response.Redirect("Error_Page?M=SU");
+                }
 
                 Neg_Cliente Neg_Clien = new Neg_Cliente();
 

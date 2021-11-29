@@ -12,11 +12,27 @@ namespace TP_FINAL_PROG3_DORDI
         public int NivelUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            var Usuario = Session["Usuario"].ToString();
-            Saludo.Text = "Hola " + Usuario;
+            try
+            {
+                var Usuario = Session["Usuario"].ToString();
+                Saludo.Text = "Hola " + Usuario;
 
-            NivelUsuario = (int)Session["NivelUsuario"];
+                NivelUsuario = (int)Session["NivelUsuario"];
+            }
+            catch (Exception)
+            {
 
+                Response.Redirect("Error_Page?M=SU");
+            }
+            
+
+        }
+
+        protected void LogOut_Click(object sender, EventArgs e)
+        {
+            Session.Remove("Usuario");
+            Session.Remove("NivelUsuario");
+            Response.Redirect("Login");
         }
     }
 }

@@ -20,10 +20,17 @@ namespace TP_FINAL_PROG3_DORDI
             if (!IsPostBack)
             {
 
-                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                try
+                {
+                    NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                }
+                catch (Exception)
+                {
 
-               
-                    
+                    Response.Redirect("Error_Page?M=SU");
+                }
+
+
 
                 var ID = Request.QueryString["ID"] != null ? Request.QueryString["ID"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";

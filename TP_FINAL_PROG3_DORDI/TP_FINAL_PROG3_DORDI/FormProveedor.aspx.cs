@@ -25,19 +25,20 @@ namespace TP_FINAL_PROG3_DORDI
                 lbl_TituloActualiza.Visible = false;
                 CargarRubros();
 
-                var CuitProv = Request.QueryString["Cuit"] != null ? Request.QueryString["Cuit"].ToString() : "" ;
+                var CuitProv = Request.QueryString["Cuit"] != null ? Request.QueryString["Cuit"].ToString() : "";
                 var Tipo = Request.QueryString["Mod"] != null ? Request.QueryString["Mod"].ToString() : "";
                 if (Tipo == "M" || Tipo == "V")
                 {
                     if (CuitProv != "")
                     {
                         CargarProveedor(CuitProv);
-                        
+
                         if (Tipo == "V")
                         {
                             _MarcarSoloLectura();
                         }
-                        else {
+                        else
+                        {
                             btnActualizar.Visible = true;
                             btnGrabar.Visible = false;
                             txt_CUIT.Visible = false;
@@ -85,18 +86,18 @@ namespace TP_FINAL_PROG3_DORDI
         protected void CargarProveedor(string CuitProv)
         {
             Neg_Proveedor NegProv = new Neg_Proveedor();
-                        
+
             Proveedor Prov = NegProv.GetSingle(CuitProv);
 
             if (Prov.RazonSocial != "")
             {
                 txt_CUIT.Text = Prov.CUIT;
                 txt_RazonSocial.Text = Prov.RazonSocial;
-                txt_Direccion.Text = Prov.Direccion ;
+                txt_Direccion.Text = Prov.Direccion;
                 txt_Telefono.Text = Prov.Telefono;
-                txt_Mail.Text = Prov.Mail ;
+                txt_Mail.Text = Prov.Mail;
                 cbx_Rubro.SelectedValue = Prov.Rubro.Codigo;
-                txt_PersonaContacto.Text = Prov.PersonaContacto ;
+                txt_PersonaContacto.Text = Prov.PersonaContacto;
             }
         }
 
@@ -115,7 +116,7 @@ namespace TP_FINAL_PROG3_DORDI
 
 
             Proveedor Prove = new Proveedor();
-            
+
             Prove.CUIT = txt_CUIT.Text;
             Prove.RazonSocial = txt_RazonSocial.Text;
             Prove.Direccion = txt_Direccion.Text;
@@ -125,8 +126,15 @@ namespace TP_FINAL_PROG3_DORDI
             Prove.Rubro.Codigo = (string)cbx_Rubro.SelectedItem.Value;
             Prove.PersonaContacto = txt_PersonaContacto.Text;
             
+            try
+            {
+                negocio.agregar(Prove);
+            }
+            catch (Exception)
+            {
 
-            negocio.agregar(Prove);
+                Response.Redirect("Error_Page?M=PG");
+            }
 
             //CON EL RESPONSE VOLVEMOS A LA PAGINA DE LA GRILLA
             Response.Redirect("Proveedores.aspx");
@@ -164,6 +172,6 @@ namespace TP_FINAL_PROG3_DORDI
 
         }
 
-          
+
     }
 }

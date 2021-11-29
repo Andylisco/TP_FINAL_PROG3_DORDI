@@ -37,7 +37,7 @@
                     <asp:Button Text="GESTION PRODUCTOS" OnClick="btn_Producto_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTION CLIENTES" OnClick="btn_Cliente_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTION PROVEEDORES" OnClick="btn_Proveedor_Click" runat="server" CssClass="btn btn-primary" />
-                    <asp:Button Text="GESTIONAR USUARIOS" ID="btn_GestionarUsuarios" runat="server" CssClass="btn btn-primary" />
+                    <asp:Button Text="GESTIONAR USUARIOS" ID="btn_GestionarUsuarios" OnClick="btn_GestionarUsuarios_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTIONAR COMPRAS" ID="btn_Compras" OnClick="btn_Compras_Click" runat="server" CssClass="btn btn-primary" />
                     <asp:Button Text="GESTIONAR VENTAS" ID="btn_Ventas" OnClick="btn_Ventas_Click" runat="server" CssClass="btn btn-primary" />
 

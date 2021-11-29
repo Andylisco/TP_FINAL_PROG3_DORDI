@@ -113,13 +113,19 @@ namespace TP_FINAL_PROG3_DORDI
             Clien.Apellido = txt_Apellido.Text;
             Clien.Direccion = txt_Direccion.Text;
             Clien.Telefono = txt_Telefono.Text;
-            Clien.EMail = txt_EMail.Text;           
+            Clien.EMail = txt_EMail.Text;
 
-
+            try { 
             NegCli.agregar(Clien);
+            }
+            catch (Exception)
+            {
 
-            //CON EL RESPONSE VOLVEMOS A LA PAGINA DE LA GRILLA
-            Response.Redirect("Clientes.aspx");
+                Response.Redirect("Error_Page?M=CG");
+            }
+
+    //CON EL RESPONSE VOLVEMOS A LA PAGINA DE LA GRILLA
+    Response.Redirect("Clientes.aspx");
         }
 
 

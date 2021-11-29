@@ -117,9 +117,11 @@
     <Content Include="Content\Estilos.css" />
     <Content Include="EditarItemComp.aspx" />
     <Content Include="EditarItemVenta.aspx" />
+    <Content Include="Error_Page.aspx" />
     <Content Include="FormCliente.aspx" />
     <Content Include="FormCompras.aspx" />
     <Content Include="FormProducto.aspx" />
+    <Content Include="FormUsuario.aspx" />
     <Content Include="FormVentas.aspx" />
     <Content Include="Imagenes\Comercio.jpg" />
     <Content Include="Imagenes\Depocito.png" />
@@ -205,6 +207,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Usuarios.aspx" />
     <Content Include="Ventas.aspx" />
     <Content Include="Compras.aspx" />
     <Content Include="FormProveedor.aspx" />
@@ -285,6 +288,13 @@
     <Compile Include="EditarItemVenta.aspx.designer.cs">
       <DependentUpon>EditarItemVenta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Error_Page.aspx.cs">
+      <DependentUpon>Error_Page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error_Page.aspx.designer.cs">
+      <DependentUpon>Error_Page.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormCliente.aspx.cs">
       <DependentUpon>FormCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,6 +315,13 @@
     </Compile>
     <Compile Include="FormProducto.aspx.designer.cs">
       <DependentUpon>FormProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormUsuario.aspx.cs">
+      <DependentUpon>FormUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormUsuario.aspx.designer.cs">
+      <DependentUpon>FormUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormVentas.aspx.cs">
       <DependentUpon>FormVentas.aspx</DependentUpon>
@@ -333,6 +350,13 @@
     </Compile>
     <Compile Include="Productos.aspx.designer.cs">
       <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ventas.aspx.cs">
       <DependentUpon>Ventas.aspx</DependentUpon>

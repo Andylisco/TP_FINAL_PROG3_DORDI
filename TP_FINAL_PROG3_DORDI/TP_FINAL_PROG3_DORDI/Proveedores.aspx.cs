@@ -37,8 +37,14 @@ namespace TP_FINAL_PROG3_DORDI
                 }
             }
 
+            try { 
             NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+            }
+            catch (Exception)
+            {
 
+                Response.Redirect("Error_Page?M=SU");
+            }
             // dgvProveedores.DataSource = ListaProv;
             //
             // dgvProveedores.DataBind();

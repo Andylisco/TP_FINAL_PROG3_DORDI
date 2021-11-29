@@ -41,10 +41,17 @@ namespace TP_FINAL_PROG3_DORDI
                     ListadoProductos = NegPro.GetAll();
                 }
 
-                
+                try
+                {
 
-                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
-                
+                    NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                }
+                catch (Exception)
+                {
+
+                    Response.Redirect("Error_Page?M=SU");
+                }
+
             }
         }
 

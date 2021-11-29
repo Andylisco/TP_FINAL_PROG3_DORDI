@@ -21,9 +21,15 @@ namespace TP_FINAL_PROG3_DORDI
         {
             if (!IsPostBack)
             {
+                try
+                {
+                    NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
+                }
+                catch (Exception)
+                {
 
-                NivelUsuario = int.Parse(Session["NivelUsuario"].ToString());
-
+                    Response.Redirect("Error_Page?M=SU");
+                }
                 ListaProductos = new List<Producto>();
 
                 ListaProductos = (List<Producto>)Session["ListaProductosVenta"];

@@ -19,8 +19,8 @@
 
 
    
+    <hr />    
     <hr />
-
 
     <div class="CentrarTitulos">
         <h3>LISTADO PROVEEDORES</h3>
