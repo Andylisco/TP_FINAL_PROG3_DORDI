@@ -245,13 +245,16 @@ namespace Negocio
             datos.ejecutarLectura();
 
 
-
+            if (datos.Lector != null)
+            {
             while (datos.Lector.Read())
             {
                 if (!(datos.Lector["StockCompras"] is DBNull))
                 {
                     stock += (int)datos.Lector["StockCompras"];
                 }
+            }
+                
             }
 
             //DESCONTAMOS EL STOCK DE VENTAS
@@ -262,12 +265,16 @@ namespace Negocio
 
             datos2.ejecutarLectura();
 
+            if (datos2.Lector != null)
+            {
+
             while (datos2.Lector.Read())
             {
                 if (!(datos2.Lector["StockVentas"] is DBNull))
                 {
                     stock -= (int)datos2.Lector["StockVentas"];
                 }
+            }
             }
 
 
@@ -279,12 +286,16 @@ namespace Negocio
 
             datos3.ejecutarLectura();
 
+            if (datos3.Lector != null)
+            {
+
             while (datos3.Lector.Read())
             {
                 if (!(datos3.Lector["Cantidad"] is DBNull))
                 {
                     stock += (int)datos3.Lector["Cantidad"];
                 }
+            }
             }
 
 

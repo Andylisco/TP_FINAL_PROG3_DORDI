@@ -1,3 +1,9 @@
+Create database TP_Final3
+go
+
+use TP_Final3
+go
+
 create table Proveedores(
 CUIT varchar(11) primary key,
 RazonSocial varchar(50) not null,
@@ -18,7 +24,7 @@ Create Table Usuarios(
 NombreUsuario nvarchar(50) primary key,
 Clave nvarchar(20) not null,
 NivelUsuario int not null,
-Email nvarchar(20) not null,
+Email nvarchar(100) not null,
 Estado bit not null default(1),
 )
 
